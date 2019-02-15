@@ -1,6 +1,7 @@
 delete_merged_file: FALSE
 new_session: FALSE
 before_chapter_script: "before-chapter.R"
+output_dir: "docs"
 rmd_files: [
   "index.Rmd",
   "philosophical-prelude.Rmd",
