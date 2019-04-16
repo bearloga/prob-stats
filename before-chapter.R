@@ -3,23 +3,24 @@
 library(ggplot2)
 library(knitr)
 knitr::opts_chunk$set(
-  dev.args = list(bg = '#FFFFF8'),
+  include = TRUE,
   cache = TRUE,
   collapse = TRUE,
+  echo = FALSE,
+  message = FALSE,
+  tidy = FALSE,
+  warning = FALSE,
   comment = "  ",
   dev = "png",
+  dev.args = list(bg = '#FFFFF8'),
   dpi = 300,
-  echo = FALSE,
   fig.align = "center",
   fig.width = 7,
   fig.asp = 0.618,
   fig.show = "hold",
-  include = TRUE,
-  message = FALSE,
-  out.width = "70%",
-  tidy = FALSE,
-  warning = FALSE
+  out.width = "90%"
 )
+library(MASS)
 library(reshape)
 library(rstan)
 rstan_options(auto_write = FALSE)
@@ -33,7 +34,6 @@ library(tufte)
 
 printf <- function(pattern, ...) {
   cat(sprintf(pattern, ...))
-#  cat(sprintf(paste("#", pattern), ...))
 }
 
 print_file <- function(file) {

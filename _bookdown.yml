@@ -9,6 +9,9 @@ rmd_files: [
   "multiple-random-variables.Rmd",
   "expectations.Rmd",
   "joint.Rmd",
+  "finite-markov-chains.Rmd",
+  "stationary-markov-chains.Rmd",
+  "discrete-markov-chains.Rmd",
   "continuous-random-variables.Rmd",
   "densities.Rmd",
   "inference.Rmd",
@@ -16,5 +19,12 @@ rmd_files: [
   "predictive-inference.Rmd",
   "testing-prngs.Rmd",
   "floating-point.Rmd",
-  "normal.Rmd"
+  "normal.Rmd",
+  "calibration.Rmd",
+  "regression-mean.Rmd",
+  "mcmc.Rmd",
+  "metropolis.Rmd",
+  "mcmc-convergence.Rmd",
+  "exponential.Rmd",
+  "conjugacy.Rmd"
 ]
