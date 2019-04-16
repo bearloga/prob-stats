@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="17 Regression to the Mean | Probability and Statistics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Bob Carpenter" />
+
+<meta name="date" content="2019-01-01" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="17 Regression to the Mean | Probability and Statistics">
+
+<title>17 Regression to the Mean | Probability and Statistics</title>
+
+<link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#preface">Preface</a></li>
+<li><a href="what-is-probability.html#what-is-probability">What is Probability?</a></li>
+<li><a href="random-variables-and-event-probabilities.html#random-variables-and-event-probabilities"><span class="toc-section-number">1</span> Random Variables and Event Probabilities</a></li>
+<li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
+<li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
+<li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="regression-to-the-mean" class="section level1">
+<h1><span class="header-section-number">17</span> Regression to the Mean</h1>
+<p>After a band puts out a great first album, it’s often followed by a
+less great second album. Bands seem to suffer from a kind of
+sophomore slump, in which they get worse after a first good
+effort.<label for="tufte-sn-219" class="margin-toggle sidenote-number">219</label><input type="checkbox" id="tufte-sn-219" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">219</span> Used as an adjective, “sophomore” means the second of
+something.</span> Although journalists and other onlookers like to make up
+explanations, we’ll see that there’s a good statistical reason that
+this should not be so surprising or need so much explanation. They’re
+just suffering what’s known as regression to the mean.</p>
+<div id="francis-galton-and-height" class="section level2">
+<h2><span class="header-section-number">17.1</span> Francis Galton and height</h2>
+<p>In 1886, Francis Galton was the first to notice the phenomenon and
+give it a name, when he moved from studying seeds to people, and
+wrote,<label for="tufte-sn-220" class="margin-toggle sidenote-number">220</label><input type="checkbox" id="tufte-sn-220" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">220</span> Galton, Francis. 1886. Regression towards mediocrity in
+hereditary stature. <em>The Journal of the Anthropological Institute of
+Great Britain and Ireland</em>. 15:246–263.</span></p>
+<blockquote>
+<p>When Mid-Parents are taller than mediocrity, their Children tend to
+be shorter than they. When Mid Parents are shorter than mediocrity,
+their Children tend to be taller than they.</p>
+</blockquote>
+<p>Translating to modern English, Galton was saying that tall parents are
+likely to have children shorter than they are and short parents likely
+to have children taller than themselves. Galton called this
+“regression toward mediocrity,” with “mediocrity” denoting the
+median.<label for="tufte-sn-221" class="margin-toggle sidenote-number">221</label><input type="checkbox" id="tufte-sn-221" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">221</span> In the kinds of roughly symmetric distributions with which
+Galton was working, the mean and median are roughly the same.</span></p>
+<p>Galton went further and identified the factor by which this regression
+occurred, with a greater difference occurring the larger the parents
+deviated above or below the median.</p>
+</div>
+<div id="binomial-example" class="section level2">
+<h2><span class="header-section-number">17.2</span> Binomial example</h2>
+<p>We’re going to use simulation to demonstrate what regression to the
+mean looks like in a controlled situation. Let’s suppose we have <span class="math inline">\(N = 500\)</span> robot athletes, all of whom have exactly the same chance <span class="math inline">\(\theta = 0.3\)</span> of success.<label for="tufte-sn-222" class="margin-toggle sidenote-number">222</label><input type="checkbox" id="tufte-sn-222" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">222</span> Imagine spiking serves, hitting baseballs, sinking
+putts, ringing horseshoes, bullseying darts, or curling stones to a
+mark; the chance of success is arbitrarily chosen to make the example
+concrete.</span></p>
+<p>A season’s outcomes may be represented as a random variable <span class="math inline">\(U = U_1, \ldots, U_N\)</span>, where <span class="math inline">\(U_n \in 0:M\)</span>. Now let’s imagine we’re going to
+simulate a season in which each each robot athlete gets exactly <span class="math inline">\(M = 50\)</span> chances,</p>
+<p><span class="math display">\[
+U_n \sim \mbox{binomial}(M, \theta).
+\]</span></p>
+<p>In the time off between seasons, the manager decides that robots who
+had below average performance would have a better chance of success
+with a fresh coat of bright orange paint. Assuming the paint has no
+effect on the robots, who are only following programming. The second
+season’s outcome can be represented as a variable <span class="math inline">\(V = V_1, \ldots, V_N\)</span>, where</p>
+<p><span class="math display">\[
+V_n \sim \mbox{binomial}(M, \theta).
+\]</span></p>
+<p>We can write a simulation as easily as</p>
+<pre><code>N = 500
+M = 50
+theta = 0.3
+for (n in 1:N)
+  u[n] = binomial_rng(M, theta)
+  v[n] = binomial_rng(M, theta)</code></pre>
+<p>Here’s a bar plot of the robots scores in the first season.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-140"></span>
+<p class="caption marginnote shownote">
+Figure 17.1: Histogram of first season robots for <span class="math inline">\(N = 500\)</span> given <span class="math inline">\(M = 50\)</span> attempts at a task for which they each have a 30 percent chance of success. The vertical dotted line is at the expected performance (<span class="math inline">\(N \times \theta = 15\)</span>).
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-140-1.png" alt="Histogram of first season robots for $N = 500$ given $M = 50$ attempts at a task for which they each have a 30 percent chance of success.  The vertical dotted line is at the expected performance ($N \times \theta = 15$)." width="90%"  />
+</div>
+<p>One way to evaluate whether the treatment had any effect is to look at
+the painted robots and see if their level of success improved on
+average after the paint job. This requires retrieving the difference
+in successes for each of the repainted robotos. We have assumed the
+robots that performed worse than average were repainted.</p>
+<pre><code>repainted = (u &lt; 15)
+improvement = v[repainted] - u[repainted]
+print &#39;average improvement of repainted robots = &#39; mean(improvement)</code></pre>
+<p>The value of the expression <code>u &lt; 15</code> is the sequence of indexes for
+values of <code>u</code> that are less than fifteen. Thus <code>u[repainted]</code> picks
+out those values that are less than fifteen in the original season,
+and <code>u[repainted]</code> the corresponding performances in the second season
+(which may be greater than fifteen).</p>
+<p>Running this gives us</p>
+<pre><code>   average improvement of repainted robots = 2.8</code></pre>
+<p>We can see that the new paint job really gave those underperforming
+robots a boost in spirit. Now let’s see what happened to the robots
+who performed at or above average in the first season and were thus
+left with their original paint job.</p>
+<pre><code>oldpaint = (u &gt;= 15)
+decline = v[oldpaint] - u[oldpaint]
+print &#39;average decline of unrepainted robots =&#39; mean(decline)</code></pre>
+<p>Now let’s run it.</p>
+<pre><code>   average decline of unrepainted robots = -2.2</code></pre>
+<p>The average performance of the unrepainted robots went down. Maybe
+they were jealous of the repainted robots?</p>
+</div>
+<div id="regression-to-the-mean-explained" class="section level2">
+<h2><span class="header-section-number">17.3</span> Regression to the mean explained</h2>
+<p>All that’s really going on is an effect known as <em>regression to the
+mean</em>. Suppose a robot athlete had 10 successes in the first
+season. That’s pretty unlucky, because it’s well below the expectation
+of 15 successes. In general, if <span class="math inline">\(U_n\)</span> anv <span class="math inline">\(V_n\)</span> have the same
+distribution and</p>
+<p><span class="math display">\[
+\mathbb{E}[U_n] \ = \ \mathbb{E}[V_n],
+\]</span></p>
+<p>as it does in our robot athlete example, then if the result of the
+first season is <span class="math inline">\(U_n = m\)</span> successes, the average change expected in
+the second season is</p>
+<p><span class="math display">\[
+\mathbb{E}[V_n - m]
+\ = \ \mathbb{E}[V_n] - m.
+\]</span></p>
+<p>For example, a robot athlete with 10 successes in the first season
+still has a 30% chance of success and an expected number of successes
+equal to 15 in 50 attempts. Thus we expect an improvement of 5
+successes in the second season. Similarly a robot with 18 successes
+in the first season is expected to decline in the second season by 3
+successes. We can summarize the expected decline with a plot.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-143"></span>
+<p class="caption marginnote shownote">
+Figure 17.2: Expected change in performance in second season based on first season performance for robots with 30 percent chance of success in 50 attempts. The horizontal dotted line is at zero, or no change year over year, and the veritical line is at the expected number of successes. Any robot with fewer than the expected number of successes is expected to improve with no treatment, whereas one with more than the expexted number of successes is expected to decline.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-143-1.png" alt="Expected change in performance in second season based on first season performance for robots with 30 percent chance of success in 50 attempts. The horizontal dotted line is at zero, or no change year over year, and the veritical line is at the expected number of successes.  Any robot with fewer than the expected number of successes is expected to improve with no treatment, whereas one with more than the expexted number of successes is expected to decline." width="90%"  />
+</div>
+<p>So while it may look like there is an improvement due to painting the
+underperforming robots, this is attributable entirely due to the
+regression to the mean effect.</p>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="calibration-and-sharpness.html"><button class="btn btn-default">Previous</button></a>
+<a href="markov-chain-monte-carlo-methods.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

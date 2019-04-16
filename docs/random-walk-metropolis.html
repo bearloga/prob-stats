@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="19 Random Walk Metropolis | Probability and Statistics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Bob Carpenter" />
+
+<meta name="date" content="2019-01-01" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="19 Random Walk Metropolis | Probability and Statistics">
+
+<title>19 Random Walk Metropolis | Probability and Statistics</title>
+
+<link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#preface">Preface</a></li>
+<li><a href="what-is-probability.html#what-is-probability">What is Probability?</a></li>
+<li><a href="random-variables-and-event-probabilities.html#random-variables-and-event-probabilities"><span class="toc-section-number">1</span> Random Variables and Event Probabilities</a></li>
+<li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
+<li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
+<li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="random-walk-metropolis" class="section level1">
+<h1><span class="header-section-number">19</span> Random Walk Metropolis</h1>
+<p>The Metropolis algorithm is a general purpose technique to sample from
+an arbitrary target density.<label for="tufte-sn-231" class="margin-toggle sidenote-number">231</label><input type="checkbox" id="tufte-sn-231" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">231</span> We are particularly interested in
+sampling from target posterior distributions in order to compute
+expectations corresponding to parameter estimates, event
+probabilities, predictions, and comparisons.</span> The algorithm
+constructs a Markov chain whose stationary distribution is equal to
+the target density, then runs the chain long enough to draw a sample
+from the target density.</p>
+<div id="random-walk-metropolis-1" class="section level2">
+<h2><span class="header-section-number">19.1</span> Random-walk Metropolis</h2>
+<p>Suppose <span class="math inline">\(p(\theta)\)</span> is the density of an <span class="math inline">\(N\)</span>-dimensional target
+distribution over from which we want to sample.<label for="tufte-sn-232" class="margin-toggle sidenote-number">232</label><input type="checkbox" id="tufte-sn-232" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">232</span> Typically, this is a
+posterior <span class="math inline">\(p(\theta \mid y)\)</span> but we will suppress <span class="math inline">\(y\)</span> here as it
+remains constant throughout.</span> For the sake of convenience, we will
+assume it has support on all real values, i.e., <span class="math inline">\(p(\theta) &gt; 0\)</span> for all
+<span class="math inline">\(\theta \in \mathbb{R}^N\)</span>.<label for="tufte-sn-233" class="margin-toggle sidenote-number">233</label><input type="checkbox" id="tufte-sn-233" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">233</span> Most distributions with constrained
+support on <span class="math inline">\(\mathbb{R}^N\)</span> can be smoothly transformed to have support
+on all of <span class="math inline">\(\mathbb{R}^N\)</span>.</span></p>
+<p>The random walk Metropolis algorithm generates a Markov chain
+<span class="math inline">\(\theta^{(1)}, \theta^{(2)}, \ldots\)</span> whose stationary distribution is
+<span class="math inline">\(p(\theta).\)</span> The algorithm can start anywhere, so we will simply start
+it at the origin,<label for="tufte-sn-234" class="margin-toggle sidenote-number">234</label><input type="checkbox" id="tufte-sn-234" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">234</span> Later, we will have motivation to simulate multiple
+chains from diffuse starting locations, but for now, starting at the
+origin keeps things simple.</span></p>
+<p><span class="math inline">\(\theta^{(1)} = 0.\)</span></p>
+<p>For each subsequent step <span class="math inline">\(m + 1\)</span>, we first simulate a proposed
+jump,<label for="tufte-sn-235" class="margin-toggle sidenote-number">235</label><input type="checkbox" id="tufte-sn-235" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">235</span> The
+algorithm may be generalized to allow arbitrary jump proposal
+distributions. Popular choices include varying scale by dimension,
+multivariate normals to account for correlation, and longer tails.</span></p>
+<p><span class="math display">\[
+\epsilon^{(m)} \sim \mbox{normal}(0, \sigma),
+\]</span></p>
+<p>and a uniform variate,</p>
+<p><span class="math display">\[
+u^{(m)} \sim \mbox{uniform}(0, 1),
+\]</span></p>
+<p>to inform a probabilistic decision of whether or not to move from
+state <span class="math inline">\(\theta^{(m)}\)</span> to state <span class="math inline">\(\theta^{(m)} + \epsilon^{(m)}\)</span>. With
+these simulated values in hand, the random walk Metropolis algorithm
+sets the next state to be</p>
+<p><span class="math display">\[
+\theta^{(m + 1)}
+\ = \
+\begin{cases}
+\theta^{(m)} + \epsilon^{(m)}
+&amp; \mbox{if } \
+u^{(m)} \ &lt; \
+\frac{\displaystyle p\!\left( \theta^{(m)} + \epsilon^{(m)} \right)}
+     {\displaystyle p\!\left( \theta^{(m)} \right)},
+\\[6pt]
+\theta^{(m)}
+&amp; \mbox{otherwise}
+\end{cases}
+\]</span></p>
+<p>Given the definition, we always accept the proposed jump if it takes
+us to a state of higher density, i.e., if <span class="math inline">\(p\!\left( \theta^{(m)} + \epsilon^{(m)} \right) &gt; p\!\left( \theta^{(m)} \right).\)</span> If the jump
+takes us to a state of lower density, we accept the jump with
+probability equal to the density ratio of the proposed state and
+current state. This means the continuous-state Markov chain defined
+by the Metropolis algorithm can stay in the same state from time step
+to time step.<label for="tufte-sn-236" class="margin-toggle sidenote-number">236</label><input type="checkbox" id="tufte-sn-236" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">236</span> In keeping with our notation for simulation, we use <span class="math inline">\(m\)</span>
+rather than <span class="math inline">\(t\)</span> to index the “time” steps.</span></p>
+<p>The pseudocode for the random walk Metropolis algorithm just follows
+the mathematical definition of the algorithm, using local variables
+for <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(u\)</span>. As inputs, it takes the number <span class="math inline">\(M\)</span> of steps
+to simulate, the jump scale <span class="math inline">\(\sigma\)</span>, and the target density
+<span class="math inline">\(p(\theta)\)</span>, and it returns the simulated Markov chain <span class="math inline">\(\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(M)}\)</span>.</p>
+<pre><code>theta(0) = 0
+for m in 2:M
+  for (n in 1:N)
+    epsilon[n] = normal_rng(0, sigma)
+  u = uniform_rng(0, 1)
+  accept(m) = u &lt; p(theta(m) + epsilon) / p(theta(m))
+  if (accept(m))
+    theta(m + 1) = theta(m) + epsilon
+  else
+    theta(m + 1) = theta(m)
+accept_rate = sum(accept) / (M - 1)</code></pre>
+<p>The final step in the computation calculates the <em>acceptance rate</em>,
+which is the proportion of proposed jumps that were accepted in the
+particular execution of the algorithm.<label for="tufte-sn-237" class="margin-toggle sidenote-number">237</label><input type="checkbox" id="tufte-sn-237" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">237</span> This rate will vary based on
+the random number generator.</span></p>
+<p>Because we may be working in high dimensions and with big data sets,
+we need to be careful to avoid arithmetic underflow by carrying out
+all computation on the log scale. Specifically, we assume that rather
+than a function to compute <code>p()</code>, we are given a function to compute
+<code>log p()</code>. Because both sides of the acceptance test inequality are
+positive and the logarithm function is monotonic, we can just take the
+log of both sides and define</p>
+<pre><code>  accept = log(u) &lt; log(p(theta(m) + epsilon) / p(theta(m)))</code></pre>
+<p>In practice, we may only know the density up to an additive
+constant. We’ll only be able to compute <span class="math inline">\(\log q(\theta)\)</span>, where</p>
+<p><span class="math display">\[
+\log q(\theta) = \log p(\theta) + \mbox{const}.
+\]</span></p>
+<p>for some unknown constant that doesn’t depend on <span class="math inline">\(\theta\)</span>.
+Although unregularized densities may be negative, we don’t get in
+trouble with negative logarithms because the constants cancel out,</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+\left( \log p\!\left(\theta^{(m)} + \epsilon\right) + \mbox{const} \right)
+- \left( \log p\!\left(\theta^{(m)}\right) + \mbox{const} \right)
+&amp; = &amp;
+\log p\!\left(\theta^{(m)} + \epsilon\right) - \log p\!\left(\theta^{(m)}\right)
+\\[8pt]
+&amp; = &amp;
+\log \frac{\textstyle p\!\left(\theta^{(m)} + \epsilon\right)}
+          {\textstyle p\!\left(\theta^{(m)}\right)}.
+\end{array}
+\]</span></p>
+</div>
+<div id="metropolis-example" class="section level2">
+<h2><span class="header-section-number">19.2</span> Metropolis example</h2>
+<p>As an example, we can start with a two-dimensional density <span class="math inline">\(p(\theta)\)</span>
+in which the values <span class="math inline">\(\theta = (\theta_1, \theta_2)\)</span> are positively
+correlated,<label for="tufte-sn-238" class="margin-toggle sidenote-number">238</label><input type="checkbox" id="tufte-sn-238" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">238</span> The distribution is bivariate normal located at the
+origin, with unit scale and 0.9 correlation, i.e., with covariance
+matrix
+<span class="math display">\[
+\Sigma
+\ = \
+\begin{bmatrix}
+1 &amp; 0.9
+\\
+0.9 &amp; 1
+\end{bmatrix}
+\]</span>
+and density
+<span class="math display">\[
+\begin{array}{rcl}
+\log p(\theta)
+&amp; = &amp;
+\log \, \mbox{multi-normal}\!\left(\theta \ \Big| \ 0, \, \Sigma\right)
+\\[4pt]
+&amp; \propto &amp;
+-\frac{1}{2} \, \theta^{\top} \, \Sigma^{-1} \, \theta
+\ + \ \mbox{const}
+\\[4pt]
+&amp; \approx &amp; -2.6 \times \theta_1^2
+\ - \ 2.6 \times \theta_2^2
+\ + \ 4.7 \times \theta_1 \theta_2
++ \mbox{const.}
+\end{array}
+\]</span></span></p>
+<p><span class="math display">\[
+\log p(\theta)
+= -2.6 \, \theta_1^2
+\ - \ 2.6 \, \theta_2^2
+\ + \ 4.7 \, \theta_1 \, \theta_2
++ \mbox{const.}
+\]</span></p>
+<p>Let’s see what we get when taking draws using the Metropolis
+algorithm. First, let’s try <span class="math inline">\(\sigma \in 0.125, 0.25, 0.5\)</span> and start at
+<span class="math inline">\(\theta(1) = (0, 0).\)</span><label for="tufte-sn-239" class="margin-toggle sidenote-number">239</label><input type="checkbox" id="tufte-sn-239" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">239</span> <span class="math inline">\((0, 0)\)</span> is coincidentally the point at which
+the example density is maximized. This requires escaping from the
+point of maximum log density.</span></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-147-1.png" width="90%"  style="display: block; margin: auto;" /></p>
+<p>Here’s a scatterplot of independent draws.<label for="tufte-sn-240" class="margin-toggle sidenote-number">240</label><input type="checkbox" id="tufte-sn-240" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">240</span> Because it’s bivariate
+normal, we can cheat and use off-the-shelf algorithms to generate
+independent draws.</span></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-148"></span>
+<p class="caption marginnote shownote">
+Figure 19.1: Scatterplot of draws from a bivariate normal with unit scale and correlation 0.9.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-148-1.png" alt="Scatterplot of draws from a bivariate normal with unit scale and correlation 0.9." width="90%"  />
+</div>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="markov-chain-monte-carlo-methods.html"><button class="btn btn-default">Previous</button></a>
+<a href="monitoring-approximate-convergence.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

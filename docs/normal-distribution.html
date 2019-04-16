@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="12 Normal Distribution | Probability and Statistics" />
+<meta property="og:title" content="15 Normal Distribution | Probability and Statistics" />
 <meta property="og:type" content="book" />
 
 
@@ -17,7 +17,7 @@
 
 <meta name="author" content="Bob Carpenter" />
 
-<meta name="date" content="2018-01-01" />
+<meta name="date" content="2019-01-01" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -26,9 +26,9 @@ MathJax.Hub.Config({
 </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-<meta name="description" content="12 Normal Distribution | Probability and Statistics">
+<meta name="description" content="15 Normal Distribution | Probability and Statistics">
 
-<title>12 Normal Distribution | Probability and Statistics</title>
+<title>15 Normal Distribution | Probability and Statistics</title>
 
 <link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
 <link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
@@ -55,14 +55,24 @@ MathJax.Hub.Config({
 <li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
 <li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
 <li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
-<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">5</span> Continuous Random Variables</a></li>
-<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">6</span> Continuous Distributions and Densities</a></li>
-<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">7</span> Statistical Inference and Inverse Problems</a></li>
-<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">8</span> Rejection Sampling</a></li>
-<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">9</span> Posterior Predictive Inference</a></li>
-<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">10</span> Pseudorandom Number Generators</a></li>
-<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">11</span> Floating Point Arithmetic</a></li>
-<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">12</span> Normal Distribution</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
 </ul>
 </div>
 </div>
@@ -70,33 +80,33 @@ MathJax.Hub.Config({
 <div class="row">
 <div class="col-sm-12">
 <div id="normal-distribution" class="section level1">
-<h1><span class="header-section-number">12</span> Normal Distribution</h1>
+<h1><span class="header-section-number">15</span> Normal Distribution</h1>
 <div id="limit-of-binomials" class="section level2">
-<h2><span class="header-section-number">12.1</span> Limit of binomials</h2>
+<h2><span class="header-section-number">15.1</span> Limit of binomials</h2>
 <p>In 1733, Abraham de Moivre noticed that as the number of trials in a
 binomial distribution grew, the resulting distribution became nearly
-symmetric and bell-shaped.<label for="tufte-sn-181" class="margin-toggle sidenote-number">181</label><input type="checkbox" id="tufte-sn-181" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">181</span> De Moivre, A., 1733. <em>Approximatio ad
+symmetric and bell-shaped.<label for="tufte-sn-205" class="margin-toggle sidenote-number">205</label><input type="checkbox" id="tufte-sn-205" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">205</span> De Moivre, A., 1733. <em>Approximatio ad
 summam terminorum binomii</em>.</span> With 10 trials and a probability of
 success of 0.9 in each trial, the distribution is clearly asymmetric
 (i.e., skewed).</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-101"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-135"></span>
 <p class="caption marginnote shownote">
-Figure 12.1: Probability of number of successes in <span class="math inline">\(N = 10\)</span> independent trials, each with a 90% chance of success. The result is <span class="math inline">\(\mbox{binomial}(y \mid 10, 0.9)\)</span> by construction. With only ten trials, the distribution is highly asymmetric, with skew (longer tails) to the left.
+Figure 15.1: Probability of number of successes in <span class="math inline">\(N = 10\)</span> independent trials, each with a 90 percent chance of success. The result is <span class="math inline">\(\mbox{binomial}(y \mid 10, 0.9)\)</span> by construction. With only ten trials, the distribution is highly asymmetric, with skew (longer tails) to the left.
 </p>
-<img src="_main_files/figure-html/unnamed-chunk-101-1.png" alt="Probability of number of successes in $N = 10$ independent trials, each with a 90% chance of success.  The result is $\mbox{binomial}(y \mid 10, 0.9)$ by construction. With only ten trials, the distribution is highly asymmetric, with skew (longer tails) to the left." width="70%"  />
+<img src="_main_files/figure-html/unnamed-chunk-135-1.png" alt="Probability of number of successes in $N = 10$ independent trials, each with a 90 percent chance of success.  The result is $\mbox{binomial}(y \mid 10, 0.9)$ by construction. With only ten trials, the distribution is highly asymmetric, with skew (longer tails) to the left." width="90%"  />
 </div>
 <p>But when we increase the number of trials by a factor of 100 to
 <span class="math inline">\(N = 1\,000\)</span> without changing the 0.9 probability of success, the result is a nearly symmetric bell shape.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-102"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-136"></span>
 <p class="caption marginnote shownote">
-Figure 12.2: Probability of number of successes in <span class="math inline">\(N = 1000\)</span> independent trials, each with a 90% chance of success. The familiar bell-shaped curve arises as <span class="math inline">\(N\)</span> grows.
+Figure 15.2: Probability of number of successes in <span class="math inline">\(N = 1000\)</span> independent trials, each with a 90 percent chance of success. The familiar bell-shaped curve arises as <span class="math inline">\(N\)</span> grows.
 </p>
-<img src="_main_files/figure-html/unnamed-chunk-102-1.png" alt="Probability of number of successes in $N = 1000$ independent trials, each with a 90% chance of success. The familiar bell-shaped curve arises as $N$ grows." width="70%"  />
+<img src="_main_files/figure-html/unnamed-chunk-136-1.png" alt="Probability of number of successes in $N = 1000$ independent trials, each with a 90 percent chance of success. The familiar bell-shaped curve arises as $N$ grows." width="90%"  />
 </div>
 <p>de Moivre found that the normal density function (to be developed
 below), despite coming from a continuous distribution, provided a
 tight approximation to the binomial probablity mass function as <span class="math inline">\(N\)</span>
-becomes large.<label for="tufte-sn-182" class="margin-toggle sidenote-number">182</label><input type="checkbox" id="tufte-sn-182" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">182</span> This is because the interval between integers is 1, so
+becomes large.<label for="tufte-sn-206" class="margin-toggle sidenote-number">206</label><input type="checkbox" id="tufte-sn-206" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">206</span> This is because the interval between integers is 1, so
 that
 <span class="math display">\[\begin{array}{rcl}
 1 &amp; = &amp; \int_{-\infty}^{\infty} p(x) \mathrm{d}x
@@ -106,10 +116,10 @@ that
 \]</span></span></p>
 </div>
 <div id="the-normal-motivated-by-least-square-errors" class="section level2">
-<h2><span class="header-section-number">12.2</span> The normal motivated by least square errors</h2>
+<h2><span class="header-section-number">15.2</span> The normal motivated by least square errors</h2>
 <p>In 1809, Carl Friedrich Gauss published his treatise on the motion of
 planets, in which he derives the normal distribution from the method
-of least squares.<label for="tufte-sn-183" class="margin-toggle sidenote-number">183</label><input type="checkbox" id="tufte-sn-183" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">183</span> Gauss, Carolo Friderico, 1809. <em>Theoria Motus
+of least squares.<label for="tufte-sn-207" class="margin-toggle sidenote-number">207</label><input type="checkbox" id="tufte-sn-207" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">207</span> Gauss, Carolo Friderico, 1809. <em>Theoria Motus
 Corporum Coelestium in sectionibus conicis solem ambientium.</em> Sumtibus
 Frid. Perthes et IH Besser, Hamburgi. English translation: Theory of
 Motion of the Celestial Bodies Moving in Conic Sections Around the
@@ -119,7 +129,7 @@ taking their average,</p>
 \bar{y} = \frac{1}{N} \sum_{n=1}^N y_n.
 \]</span></p>
 <p>Gauss realized that the average <span class="math inline">\(\bar{y}\)</span> minimizes the sum of
-square differences from the observed values,<label for="tufte-sn-184" class="margin-toggle sidenote-number">184</label><input type="checkbox" id="tufte-sn-184" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">184</span> The expression
+square differences from the observed values,<label for="tufte-sn-208" class="margin-toggle sidenote-number">208</label><input type="checkbox" id="tufte-sn-208" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">208</span> The expression
 <span class="math inline">\(\mbox{arg min}_y \, f(y)\)</span> returns the value of <span class="math inline">\(y\)</span> that minimizes
 <span class="math inline">\(f(y)\)</span>, e.g., <span class="math display">\[\mbox{arg min}_y \ (y - 3)^2 = 3\]</span>.</span></p>
 <p><span class="math display">\[
@@ -134,7 +144,7 @@ would have roughly the property that</p>
 \log p(y) = -y^2 + \mbox{const.}
 \]</span></p>
 <p>We have to work on the log scale here in order for the resulting
-density function to be normalizable.<label for="tufte-sn-185" class="margin-toggle sidenote-number">185</label><input type="checkbox" id="tufte-sn-185" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">185</span> Normalizability requires
+density function to be normalizable.<label for="tufte-sn-209" class="margin-toggle sidenote-number">209</label><input type="checkbox" id="tufte-sn-209" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">209</span> Normalizability requires
 <span class="math display">\[
 \begin{array}{rcl}
 \int_{-\infty}^{\infty} p(y) \, \mathrm{d}y
@@ -165,10 +175,10 @@ distribution,</p>
 <p>The <em>kernel</em> of a probabilty function defines it as a function of
 parameters and variate outcome up to a proportion. Most of the algebra
 in statistics only requires probability functions up to a proportion,
-so it’s usually simpler to drop the normalizing constants.<label for="tufte-sn-186" class="margin-toggle sidenote-number">186</label><input type="checkbox" id="tufte-sn-186" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">186</span> It’s also
+so it’s usually simpler to drop the normalizing constants.<label for="tufte-sn-210" class="margin-toggle sidenote-number">210</label><input type="checkbox" id="tufte-sn-210" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">210</span> It’s also
 faster computationally to drop normalizing constant, which often
 involve complicated expensive special function evaluation.</span></p>
-<p>Including the normalizing constants, the normal distribution is<label for="tufte-sn-187" class="margin-toggle sidenote-number">187</label><input type="checkbox" id="tufte-sn-187" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">187</span> The
+<p>Including the normalizing constants, the normal distribution is<label for="tufte-sn-211" class="margin-toggle sidenote-number">211</label><input type="checkbox" id="tufte-sn-211" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">211</span> The
 constant factor is defined by <span class="math display">\[ \int_{-\infty}^{\infty} \exp\left(
 -\frac{1}{2} y^2 \right) \ = \ \sqrt{2 \pi}. \]</span></span></p>
 <p><span class="math display">\[
@@ -200,7 +210,7 @@ minimizes square error,</p>
 \]</span></p>
 </div>
 <div id="adding-location-and-scale-parameters" class="section level2">
-<h2><span class="header-section-number">12.3</span> Adding location and scale parameters</h2>
+<h2><span class="header-section-number">15.3</span> Adding location and scale parameters</h2>
 <p>The standard normal distribution has an expectaiton of zero and standard
 deviation one. We can add a scale parameter <span class="math inline">\(\sigma &gt; 0\)</span> to multiply
 the standard deviation and a location parameter <span class="math inline">\(\mu\)</span> so that if <span class="math inline">\(Y \sim \mbox{normal}(\mu, \sigma)\)</span>, then <span class="math inline">\(\mathbb{E}[Y] = \mu\)</span> and
@@ -218,7 +228,7 @@ Y = \mu + \sigma \times Z,
 Y \sim \mbox{normal}(\mu, \sigma).
 \]</span></p>
 <p>Dealing with the required change of variables for the inverse
-transform<label for="tufte-sn-188" class="margin-toggle sidenote-number">188</label><input type="checkbox" id="tufte-sn-188" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">188</span> This inverse transform has its own name, the <em>z-transform</em>,
+transform<label for="tufte-sn-212" class="margin-toggle sidenote-number">212</label><input type="checkbox" id="tufte-sn-212" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">212</span> This inverse transform has its own name, the <em>z-transform</em>,
 and in general may be written as <span class="math display">\[Z = \frac{Y -
 \mathbb{E}[Y]}{\mbox{sd}[Y]}.\]</span> and used to standardize any random
 variable <span class="math inline">\(Y\)</span> with a finite expectation and variance. The resulting
@@ -230,7 +240,7 @@ Z
 \frac{Y - \mu}{\sigma},
 \]</span></p>
 <p>lets us derive the general normal density function for location
-parameter <span class="math inline">\(\mu\)</span> and scale parameter <span class="math inline">\(\sigma &gt; 0\)</span> as<label for="tufte-sn-189" class="margin-toggle sidenote-number">189</label><input type="checkbox" id="tufte-sn-189" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">189</span> It’s a standard
+parameter <span class="math inline">\(\mu\)</span> and scale parameter <span class="math inline">\(\sigma &gt; 0\)</span> as<label for="tufte-sn-213" class="margin-toggle sidenote-number">213</label><input type="checkbox" id="tufte-sn-213" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">213</span> It’s a standard
 Jacobian calculation for transform
 <span class="math display">\[
 Y = f(Z) = \mu + \sigma \times Z,
@@ -285,7 +295,7 @@ scale,</li>
 </ul>
 </div>
 <div id="central-limit-theorem-1" class="section level2">
-<h2><span class="header-section-number">12.4</span> Central limit theorem</h2>
+<h2><span class="header-section-number">15.4</span> Central limit theorem</h2>
 <p>Laplace proved the central limit theorem in 1812, which established
 the sense in which the normal distribution is normal. The theorem
 tells us that if we take a sequence of independent, finite
@@ -313,7 +323,7 @@ Z = \frac{1}{N} \sum_{n=1}^N Y_n.
 \]</span></p>
 <p>As <span class="math inline">\(N \rightarrow \infty\)</span>, the average has a normal distribution with
 the same location as the <span class="math inline">\(Y_n\)</span> and a scale reduced by a factor of
-<span class="math inline">\(\sqrt{\frac{1}{\sigma}}\)</span>.</p>
+<span class="math inline">\(\sqrt{\frac{1}{\sqrt{N}}}\)</span>.</p>
 <p><span class="math display">\[
 \textstyle
 p_Z(z)
@@ -336,7 +346,7 @@ distribution makes sense as a representation of many natural
 phenomena.</p>
 </div>
 <div id="maximum-entropy-distribution" class="section level2">
-<h2><span class="header-section-number">12.5</span> Maximum entropy distribution</h2>
+<h2><span class="header-section-number">15.5</span> Maximum entropy distribution</h2>
 <p>The normal distribution <span class="math inline">\(\mbox{normal}(\mu, \sigma)\)</span> is the
 distribution with the maximum entropy among all distributions with
 expectation <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>.</p>
@@ -361,11 +371,8 @@ simulations <span class="math inline">\(y^{(1)}, \ldots, y^{(M)}\)</span> from <
 \frac{1}{M} \, \sum_{m=1}^M \log p_Y\left( y^{(m)} \right).
 \]</span></p>
 </div>
-<div id="computational-approximation" class="section level2">
-<h2><span class="header-section-number">12.6</span> Computational approximation</h2>
-</div>
 <div id="lognormal-distribution" class="section level2">
-<h2><span class="header-section-number">12.7</span> Lognormal distribution</h2>
+<h2><span class="header-section-number">15.6</span> Lognormal distribution</h2>
 <p>The normal distribution arises naturally as the the distribution of a
 random variable resulting from a sum of effects. What if effects are
 multiplicative rather than additive, so that it is the product,</p>
@@ -380,7 +387,7 @@ we can work on the log scale, where</p>
 <p>In this case, <span class="math inline">\(\log Y\)</span> should have a roughly normal distribution,
 being the sum of <span class="math inline">\(N\)</span> additive terms. If <span class="math inline">\(\log Y \sim \mbox{normal}(\mu, \sigma)\)</span>, then <span class="math inline">\(Y\)</span> has what is called a <em>lognormal
 distribution</em>. The lognormal density function can be calculated by
-accounting for the change of variables,<label for="tufte-sn-190" class="margin-toggle sidenote-number">190</label><input type="checkbox" id="tufte-sn-190" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">190</span> To calculate the Jacobian for
+accounting for the change of variables,<label for="tufte-sn-214" class="margin-toggle sidenote-number">214</label><input type="checkbox" id="tufte-sn-214" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">214</span> To calculate the Jacobian for
 the change of variables, note that if <span class="math inline">\(Z \sim \mbox{normal}(\mu, \sigma)\)</span> and <span class="math inline">\(Y = \exp(Z)\)</span>, then
 <span class="math display">\[
 \begin{array}{rcl}
@@ -435,11 +442,79 @@ derived from the standard normal is just</p>
 \ \propto \
 \frac{1}{y} \, \exp \left( -\frac{1}{2} \left( \log y \right)^2 \right).
 \]</span></p>
+</div>
+<div id="simulating-from-a-normal-distribution" class="section level2">
+<h2><span class="header-section-number">15.7</span> Simulating from a normal distribution</h2>
+<p>To simulate values of a normally distributed random variable</p>
+<p><span class="math display">\[
+Y \sim \mbox{normal}(\mu, \sigma),
+\]</span></p>
+<p>it suffices to simulate a standard normal
+variate</p>
+<p><span class="math display">\[
+Z \sim \mbox{normal}(0, 1)
+\]</span></p>
+<p>and let</p>
+<p><span class="math display">\[
+Y = \mu + \sigma \times Z.
+\]</span></p>
+<p>The simplest way to approximately generate from the normal
+distribution is to invoke the central limit theorem and generate
+enough draws from a uniform distribution that the result is roughly
+normal. This relies on simulation, so it is neither accurate nor
+fast.<label for="tufte-sn-215" class="margin-toggle sidenote-number">215</label><input type="checkbox" id="tufte-sn-215" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">215</span> It does correspond to Francis Galton’s <em>quincunx</em>, a physical
+machine into which marbles are dropped to fall onto a grid of pegs
+which push them randomly to the right or the left. This random walk
+produces distances after a number of steps that are roughly normally
+distributed. The approximate improves as the number of random moves
+is increased.</span></p>
+<p>A clever and efficient way to generate standard normal variates relies
+on solving a seemingly harder problem, generating two independent
+standard normal variates. By working with two independent normal
+variates <span class="math inline">\((X, Y)\)</span>, we can work in polar coordinates and generate an
+angle and radius <span class="math inline">\((\Theta, R)\)</span>, where</p>
+<p><span class="math display">\[
+X = R \times \cos \Theta
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+Y = R \times \sin \Theta.
+\]</span></p>
+<p>The other way around,</p>
+<p><span class="math display">\[
+R = \sqrt{X^2 + Y^2}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\Theta = \arctan \left( \frac{Y}{X} \right).
+\]</span></p>
+<p>Our strategy is to generate the polar coordinates <span class="math inline">\((\Theta, R)\)</span> and
+transform them to <span class="math inline">\((X, Y)\)</span> with independent standard normal
+distributions. We can generate a random angle uniformly in radians
+with</p>
+<p><span class="math display">\[
+\Theta \sim \mbox{uniform}(0, 2\pi).
+\]</span></p>
+<p>The tricky part is generating the radius, which we will do by
+simulating a uniform variate</p>
+<p><span class="math display">\[
+U \sim \mbox{uniform}(0, 1)
+\]</span></p>
+<p>and transforming it into</p>
+<p><span class="math display">\[
+R = \sqrt{-2 \log U}.
+\]</span></p>
+<p>This relies on a distribution and properties of sums of squared
+uniform variables we have not yet introduced.<label for="tufte-sn-216" class="margin-toggle sidenote-number">216</label><input type="checkbox" id="tufte-sn-216" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">216</span> The technique hinges on
+the fact that <span class="math display">\[X^2 + Y^2 \sim \mbox{chi\_squared(2)}\]</span> and if <span class="math display">\[V \sim
+\mbox{uniform}(0, 1),\]</span> then <span class="math display">\[-2 \log V \sim \mbox{chi\_squared}(2),\]</span>
+so that for our normal variates, <span class="math display">\[R = \sqrt{-2 \log V}\]</span>.</span></p>
 
 </div>
 </div>
 <p style="text-align: center;">
 <a href="floating-point-arithmetic.html"><button class="btn btn-default">Previous</button></a>
+<a href="calibration-and-sharpness.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="7 Statistical Inference and Inverse Problems | Probability and Statistics" />
+<meta property="og:title" content="10 Statistical Inference and Inverse Problems | Probability and Statistics" />
 <meta property="og:type" content="book" />
 
 
@@ -17,7 +17,7 @@
 
 <meta name="author" content="Bob Carpenter" />
 
-<meta name="date" content="2018-01-01" />
+<meta name="date" content="2019-01-01" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -26,9 +26,9 @@ MathJax.Hub.Config({
 </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-<meta name="description" content="7 Statistical Inference and Inverse Problems | Probability and Statistics">
+<meta name="description" content="10 Statistical Inference and Inverse Problems | Probability and Statistics">
 
-<title>7 Statistical Inference and Inverse Problems | Probability and Statistics</title>
+<title>10 Statistical Inference and Inverse Problems | Probability and Statistics</title>
 
 <link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
 <link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
@@ -55,14 +55,24 @@ MathJax.Hub.Config({
 <li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
 <li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
 <li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
-<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">5</span> Continuous Random Variables</a></li>
-<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">6</span> Continuous Distributions and Densities</a></li>
-<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">7</span> Statistical Inference and Inverse Problems</a></li>
-<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">8</span> Rejection Sampling</a></li>
-<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">9</span> Posterior Predictive Inference</a></li>
-<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">10</span> Pseudorandom Number Generators</a></li>
-<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">11</span> Floating Point Arithmetic</a></li>
-<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">12</span> Normal Distribution</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
 </ul>
 </div>
 </div>
@@ -70,7 +80,7 @@ MathJax.Hub.Config({
 <div class="row">
 <div class="col-sm-12">
 <div id="statistical-inference-and-inverse-problems" class="section level1">
-<h1><span class="header-section-number">7</span> Statistical Inference and Inverse Problems</h1>
+<h1><span class="header-section-number">10</span> Statistical Inference and Inverse Problems</h1>
 <p><em>Deductive inference</em> works from facts toward conclusions
 determinstically. For example, if I tell you that all men are mortal
 and that Socrates is a man, you can deductively conclude that Socrates
@@ -81,11 +91,11 @@ observations, then induction is a kind of inverse inference.
 <em>Statistical inference</em> is a kind of inductive inference that is
 specifically formulated as an inverse problem.</p>
 <div id="laplaces-birth-ratio-model" class="section level2">
-<h2><span class="header-section-number">7.1</span> Laplace’s birth ratio model</h2>
+<h2><span class="header-section-number">10.1</span> Laplace’s birth ratio model</h2>
 <p>The roots of statistical inference lie not in games of chance, but in
 the realm of public health. Pierre-Simon Laplace was investigating
 the rate of child births by sex in France in an attempt to predict
-future population sizes.<label for="tufte-sn-113" class="margin-toggle sidenote-number">113</label><input type="checkbox" id="tufte-sn-113" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">113</span> Pierre-Simon Laplace. 1812. <em>Essai
+future population sizes.<label for="tufte-sn-137" class="margin-toggle sidenote-number">137</label><input type="checkbox" id="tufte-sn-137" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">137</span> Pierre-Simon Laplace. 1812. <em>Essai
 philosophique sur les probabilités</em>. H. Remy. p. lvi of the
 Introduction. Annotated English translation of the 1825 Fifth
 Edition: Andrew I. Dale, 1995. <em>Philosophical Essay on
@@ -93,8 +103,8 @@ Probabilities</em>. Springer-Verlag.</span> Laplace reports the following
 number of live births, gathered from thirty departments of France
 between 1800 and 1802 was as follows.</p>
 <p><span class="math display">\[
-\begin{array}[r|r]
-{ } \mbox{sex} &amp; \mbox{live births}
+\begin{array}{r|r}
+\mbox{sex} &amp; \mbox{live births}
 \\ \hline
 \mbox{male} &amp; 110\,312
 \\
@@ -109,7 +119,7 @@ model</p>
 Y  \sim \mbox{binomial}(N, \Theta).
 \]</span></p>
 <p>In other words, his data-generating distribution had the probability
-mass function<label for="tufte-sn-114" class="margin-toggle sidenote-number">114</label><input type="checkbox" id="tufte-sn-114" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">114</span> The constant <span class="math inline">\(N\)</span> that appears in the full binomial
+mass function<label for="tufte-sn-138" class="margin-toggle sidenote-number">138</label><input type="checkbox" id="tufte-sn-138" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">138</span> The constant <span class="math inline">\(N\)</span> that appears in the full binomial
 notation is suppressed in the density notation <span class="math inline">\(p_{Y \mid \Theta}\)</span>—it is common to suppress constants in the notation to make
 the relationship between the modeled data <span class="math inline">\(Y\)</span> and parameters <span class="math inline">\(\Theta\)</span>
 3easier to scan.</span></p>
@@ -128,12 +138,12 @@ but we are now faced with the <em>inverse problem</em> of drawing inferences
 about <span class="math inline">\(\Theta\)</span> based on observations about <span class="math inline">\(Y\)</span>.</p>
 </div>
 <div id="what-is-a-model" class="section level2">
-<h2><span class="header-section-number">7.2</span> What is a model?</h2>
+<h2><span class="header-section-number">10.2</span> What is a model?</h2>
 <p>We say that this simple formula is a <em>model</em> in the sense that it is
 not the actual birth process, but rather a mathematical construct
 meant to reflect properties of the birth process. In this sense, it’s
 like Isaac Newton’s model of the planetary motions using differential
-equations.<label for="tufte-sn-115" class="margin-toggle sidenote-number">115</label><input type="checkbox" id="tufte-sn-115" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">115</span> Isaac Newton. 1687. <em>Philosophiae Naturalis Principia
+equations.<label for="tufte-sn-139" class="margin-toggle sidenote-number">139</label><input type="checkbox" id="tufte-sn-139" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">139</span> Isaac Newton. 1687. <em>Philosophiae Naturalis Principia
 Mathematica</em>. Translated as I. Bernard Cohen and Anne
 Whitman. 1999. <em>The Principia: Mathematical Principles of Natural
 Philosophy.</em> University of California Press.</span> The equations are not
@@ -144,14 +154,16 @@ motion of the planets, the tides, and balls dropped from towers. But
 they typically only approximate the full process being modeled in some
 way. Even Newton’s model, which is fabulously accurate at predictions
 at observable scales, is only an approximation to the finer-grained
-models of motion and gravity introduced by Albert Einstein.<label for="tufte-sn-116" class="margin-toggle sidenote-number">116</label><input type="checkbox" id="tufte-sn-116" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">116</span> Einstein,
-Albert. 1907. On the relativity principle and the conclusions drawn
-from it. <em>Jahrbuch der Radioaktivitﬁt and Elektronik</em> 4:411–462.</span>
-which itself was only a special case of the more general theory of
-relativity.<label for="tufte-sn-117" class="margin-toggle sidenote-number">117</label><input type="checkbox" id="tufte-sn-117" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">117</span> Einstein, Albert. 1916. The foundation of the general
-theory of relativity. <em>Annalen Phys.</em> 14:769–822.</span> Each successive
-model is better than the last in that it’s better at prediction, more
-general, or more elegant—science does not progress based on a single
+models of motion and gravity introduced by Albert Einstein.<label for="tufte-sn-140" class="margin-toggle sidenote-number">140</label><input type="checkbox" id="tufte-sn-140" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">140</span> Einstein,
+Albert. 1907. Über das Relativitätsprinzip und die aus demselben
+gezogenen Folgerungen. (English translation: On the relativity
+principle and the conclusions drawn from it.) <em>Jahrbuch der
+Radioaktivität und Elektronik</em> 4:411–462.</span> which itself was only a
+special case of the more general theory of relativity.<label for="tufte-sn-141" class="margin-toggle sidenote-number">141</label><input type="checkbox" id="tufte-sn-141" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">141</span> Einstein,
+Albert. 1916. The foundation of the general theory of
+relativity. <em>Annalen Phys.</em> 14:769–822.</span> Each successive model is
+better than the last in that it’s better at prediction, more general,
+or more elegant—science does not progress based on a single
 criterion for improving models.</p>
 <p>The reproductive process is complex, and many factors may impinge on
 the sex of a baby being born. Part of our job as scientists is to
@@ -167,7 +179,7 @@ Whether a model is useful is a pragmatic question which must be judged
 relative to its intended application.</p>
 </div>
 <div id="what-is-a-random-variable" class="section level2">
-<h2><span class="header-section-number">7.3</span> What is a random variable?</h2>
+<h2><span class="header-section-number">10.3</span> What is a random variable?</h2>
 <p>As in all statistical modeling, Laplace treated the observed number of
 male births <span class="math inline">\(Y\)</span> as a random variable. This assumes a form of
 counterfactual reasoning whereby we assume the world might have been
@@ -178,7 +190,7 @@ but is itself a random variable determined by factors of the
 environment. For instance, the number of attempts an athlete on a
 sports team get depends on the ability of that athlete and the number
 of reviews a movie receives depends on its popularity.</p>
-<p>As originally formulated by Thomas Bayes,<label for="tufte-sn-118" class="margin-toggle sidenote-number">118</label><input type="checkbox" id="tufte-sn-118" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">118</span> Bayes, T., 1763. LII. An
+<p>As originally formulated by Thomas Bayes,<label for="tufte-sn-142" class="margin-toggle sidenote-number">142</label><input type="checkbox" id="tufte-sn-142" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">142</span> Bayes, T., 1763. LII. An
 essay towards solving a problem in the doctrine of chances. By the
 late Rev. Mr. Bayes, FRS communicated by Mr. Price, in a letter to
 John Canton, AMFRS. <em>Philosophical Transactions of the Royal Society</em>,
@@ -190,7 +202,7 @@ of whether the male birth rate is higher, which can be expressed in
 probabilistic terms by the event probability <span class="math inline">\(\mbox{Pr}[\Theta &gt; 0.5]\)</span>.</p>
 </div>
 <div id="laplaces-inverse-problem" class="section level2">
-<h2><span class="header-section-number">7.4</span> Laplace’s inverse problem</h2>
+<h2><span class="header-section-number">10.4</span> Laplace’s inverse problem</h2>
 <p>Given a total of <span class="math inline">\(N\)</span> births, we have introduced random variables for</p>
 <ul>
 <li>the observed data of <span class="math inline">\(Y\)</span> male births, and</li>
@@ -224,12 +236,12 @@ is true if <span class="math inline">\(\Theta &gt; \frac{1}{2}\)</span>. The pro
          \right].
 \]</span></p>
 <p>If we can estimate this event probability, we can answer Laplace’s
-second question.<label for="tufte-sn-119" class="margin-toggle sidenote-number">119</label><input type="checkbox" id="tufte-sn-119" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">119</span> The quality of the answer will be determined by the
+second question.<label for="tufte-sn-143" class="margin-toggle sidenote-number">143</label><input type="checkbox" id="tufte-sn-143" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">143</span> The quality of the answer will be determined by the
 quality of the data and the quality of the model.</span></p>
 </div>
 <div id="bayess-rule-to-solve-the-inverse-problem" class="section level2">
-<h2><span class="header-section-number">7.5</span> Bayes’s rule to solve the inverse problem</h2>
-<p>The model we have is a <em>generative model</em><label for="tufte-sn-120" class="margin-toggle sidenote-number">120</label><input type="checkbox" id="tufte-sn-120" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">120</span> Also known as a <em>forward
+<h2><span class="header-section-number">10.5</span> Bayes’s rule to solve the inverse problem</h2>
+<p>The model we have is a <em>generative model</em><label for="tufte-sn-144" class="margin-toggle sidenote-number">144</label><input type="checkbox" id="tufte-sn-144" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">144</span> Also known as a <em>forward
 model</em> or a <em>mechanistic model</em> by scientists.</span>—it works from a
 parameter value <span class="math inline">\(\theta\)</span> to the observed data <span class="math inline">\(y\)</span> through a <em>sampling
 distribution</em> with probability function <span class="math inline">\(p_{Y \mid \Theta}(y \mid \theta).\)</span> What we need to solve our inference problems is the
@@ -257,7 +269,7 @@ p_{\Theta}(\theta).
 to a proportion.</p>
 </div>
 <div id="the-prior-distribution" class="section level2">
-<h2><span class="header-section-number">7.6</span> The prior distribution</h2>
+<h2><span class="header-section-number">10.6</span> The prior distribution</h2>
 <p>This still leaves the not inconsequential matter of how to determine
 <span class="math inline">\(p_{\Theta}(\theta)\)</span>, the density of the so-called <em>prior
 distribution</em> of <span class="math inline">\(\Theta\)</span>. The prior distribution encapsulates what
@@ -291,7 +303,7 @@ Luckily, because we are only building approximate models of reality,
 the prior knowledge model does not need to be perfect. We usually err
 on the side of underpowering the prior a bit compared to what we
 really know, imposing only <em>weakly informative priors</em>, such as those
-that determine scales, but not exact boundaries of parameters.<label for="tufte-sn-121" class="margin-toggle sidenote-number">121</label><input type="checkbox" id="tufte-sn-121" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">121</span> The
+that determine scales, but not exact boundaries of parameters.<label for="tufte-sn-145" class="margin-toggle sidenote-number">145</label><input type="checkbox" id="tufte-sn-145" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">145</span> The
 notion of a truly <em>uninformative prior</em> is much trickier, because to be
 truly uninformative, a prior must be scale free.</span></p>
 <p>We will have a lot to say about prior knowledge later in the book, but
@@ -313,8 +325,8 @@ to 0.52. This is a very weak prior indeed compared to what we know
 about births. Nevertheless, it will suffice for this first analysis.</p>
 </div>
 <div id="the-proportional-posterior" class="section level2">
-<h2><span class="header-section-number">7.7</span> The proportional posterior</h2>
-<p>With a prior and likelihood,<label for="tufte-sn-122" class="margin-toggle sidenote-number">122</label><input type="checkbox" id="tufte-sn-122" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">122</span> Remember, the likelihood is just the
+<h2><span class="header-section-number">10.7</span> The proportional posterior</h2>
+<p>With a prior and likelihood,<label for="tufte-sn-146" class="margin-toggle sidenote-number">146</label><input type="checkbox" id="tufte-sn-146" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">146</span> Remember, the likelihood is just the
 sampling distribution <span class="math inline">\(p_{Y \mid \Theta}(y \mid \theta)\)</span> viewed as a
 function of <span class="math inline">\(\theta\)</span> for fixed <span class="math inline">\(y\)</span>.</span> we have our full joint model in
 hand,</p>
@@ -342,7 +354,7 @@ times the likelihood,</p>
 \underbrace{p_{\Theta}(\theta)}_{\text{prior}}.
 \]</span></p>
 <p>Given the definitions of the relevant
-probability functions,<label for="tufte-sn-123" class="margin-toggle sidenote-number">123</label><input type="checkbox" id="tufte-sn-123" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">123</span> 
+probability functions,<label for="tufte-sn-147" class="margin-toggle sidenote-number">147</label><input type="checkbox" id="tufte-sn-147" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">147</span> 
 For reference, these are the likelihood
 <span class="math display">\[
 \mbox{binomial}(y \mid N, \theta)
@@ -369,11 +381,11 @@ p_{\Theta \mid Y}(\theta \mid y, N)
 \]</span></p>
 <p>To summarize, we know the posterior <span class="math inline">\(p_{\Theta \mid Y}\)</span> up to a
 proportion, but are still missing the normalizing constant so that it
-integrates to one.<label for="tufte-sn-124" class="margin-toggle sidenote-number">124</label><input type="checkbox" id="tufte-sn-124" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">124</span> We return to the normalizer later when we discuss
+integrates to one.<label for="tufte-sn-148" class="margin-toggle sidenote-number">148</label><input type="checkbox" id="tufte-sn-148" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">148</span> We return to the normalizer later when we discuss
 the beta distribution.</span></p>
 </div>
 <div id="sampling-from-the-posterior" class="section level2">
-<h2><span class="header-section-number">7.8</span> Sampling from the posterior</h2>
+<h2><span class="header-section-number">10.8</span> Sampling from the posterior</h2>
 <p>Now that we have a formula for the posterior up to a proportion, we
 are in business for sampling from the posterior. All of the sampling
 algorithms in common use require the density only up to a proportion.</p>
@@ -385,7 +397,7 @@ observed data <span class="math inline">\(y\)</span>.</p>
 specifications of our models that are exact enough to be programmed.
 Rather than relying on narrative explanation, we’ll use a pseudocode
 for models that can be easily translated for an assortment of
-posterior samplers.<label for="tufte-sn-125" class="margin-toggle sidenote-number">125</label><input type="checkbox" id="tufte-sn-125" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">125</span> This specification is sufficient for coding a
+posterior samplers.<label for="tufte-sn-149" class="margin-toggle sidenote-number">149</label><input type="checkbox" id="tufte-sn-149" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">149</span> This specification is sufficient for coding a
 sampler in BUGS, Edward, emcee, Greta, JAGS, NIMBLE, PyMC, Pyro, or
 Stan.</span></p>
 <p><span class="math display">\[
@@ -411,7 +423,7 @@ Stan.</span></p>
 \]</span></p>
 </div>
 <div id="simulating-data" class="section level2">
-<h2><span class="header-section-number">7.9</span> Simulating data</h2>
+<h2><span class="header-section-number">10.9</span> Simulating data</h2>
 <p>Rather than starting with Laplace’s data, which will present
 computational problems, we will start with some simulated data. We
 simulate data for a model by simulating the parameters from the prior,
@@ -456,29 +468,29 @@ the data was <span class="math inline">\(y = 3\)</span> boys in <span class="mat
 to do with any posterior is check that it’s reasonable.</p>
 <p>For visualizing draws of a single variable, such as the proportion of
 boy births <span class="math inline">\(\theta\)</span>, histograms are handy.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-74"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-108"></span>
 <p class="caption marginnote shownote">
-Figure 7.1: Histogram of one thousand draws from the posterior <span class="math inline">\(p(\theta \mid y)\)</span>. With thirty bins, the histogram appears ragged, but conveys the rough shape and location of the posterior.
+Figure 10.1: Histogram of one thousand draws from the posterior <span class="math inline">\(p(\theta \mid y)\)</span>. With thirty bins, the histogram appears ragged, but conveys the rough shape and location of the posterior.
 </p>
-<img src="_main_files/figure-html/unnamed-chunk-74-1.png" alt="Histogram of one thousand draws from the posterior $p(\theta \mid y)$.   With thirty bins, the histogram appears ragged, but conveys the rough shape and location of the posterior." width="70%"  />
+<img src="_main_files/figure-html/unnamed-chunk-108-1.png" alt="Histogram of one thousand draws from the posterior $p(\theta \mid y)$.   With thirty bins, the histogram appears ragged, but conveys the rough shape and location of the posterior." width="90%"  />
 </div>
 <p>Let’s up <span class="math inline">\(M\)</span> to <span class="math inline">\(1\,000\,000\)</span> and double the number of bins to get a
-better look at the posterior density. <label for="tufte-sn-126" class="margin-toggle sidenote-number">126</label><input type="checkbox" id="tufte-sn-126" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">126</span> A sample size <span class="math inline">\(M &gt; 100\)</span> is
+better look at the posterior density. <label for="tufte-sn-150" class="margin-toggle sidenote-number">150</label><input type="checkbox" id="tufte-sn-150" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">150</span> A sample size <span class="math inline">\(M &gt; 100\)</span> is
 rarely necessary for calculating estimates, event probabilities, or
 other expectations conditioned on data. For histograms, many draws are
 required to ensure low relative error in every bin so that the
 resulting histogram is smooth.</span></p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-75"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-109"></span>
 <p class="caption marginnote shownote">
-Figure 7.2: Histogram of one million draws from the posterior <span class="math inline">\(p(\theta \mid y)\)</span>. A <em>much</em> larger <span class="math inline">\(M\)</span> is required to get a fine-grained view of the whole posterior distribution than is required for an accurate summary statistic.
+Figure 10.2: Histogram of one million draws from the posterior <span class="math inline">\(p(\theta \mid y)\)</span>. A <em>much</em> larger <span class="math inline">\(M\)</span> is required to get a fine-grained view of the whole posterior distribution than is required for an accurate summary statistic.
 </p>
-<img src="_main_files/figure-html/unnamed-chunk-75-1.png" alt="Histogram of one million draws from the posterior $p(\theta \mid y)$.  A *much* larger $M$ is required to get a fine-grained view of the whole posterior distribution than is required for an accurate summary statistic." width="70%"  />
+<img src="_main_files/figure-html/unnamed-chunk-109-1.png" alt="Histogram of one million draws from the posterior $p(\theta \mid y)$.  A *much* larger $M$ is required to get a fine-grained view of the whole posterior distribution than is required for an accurate summary statistic." width="90%"  />
 </div>
 <p>Histograms have their limitations. The distribution is slightly
 asymmetric, with a longer tail to the right than to the left, but
 asymmetry can be difficult to detect visually until it is more extreme
 than here. Asymmetric distributions are said to be <em>skewed</em>, either to
-the right or left, depending on which tail is longer.<label for="tufte-sn-127" class="margin-toggle sidenote-number">127</label><input type="checkbox" id="tufte-sn-127" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">127</span> The formal
+the right or left, depending on which tail is longer.<label for="tufte-sn-151" class="margin-toggle sidenote-number">151</label><input type="checkbox" id="tufte-sn-151" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">151</span> The formal
 measurement of the <em>skew</em> of a random variable <span class="math inline">\(Y\)</span> is just another
 expectation that may be estimated via simulation, <span class="math display">\[\mbox{skew}[Y] =
 \mathbb{E}\left[\left(\frac{Y -
@@ -486,7 +498,7 @@ expectation that may be estimated via simulation, <span class="math display">\[\
 tell the exact location of the posterior mean and median visually.</p>
 </div>
 <div id="posterior-summary-statistics" class="section level2">
-<h2><span class="header-section-number">7.10</span> Posterior summary statistics</h2>
+<h2><span class="header-section-number">10.10</span> Posterior summary statistics</h2>
 <p>We often want to look at summaries of the posterior, the posterior
 mean, standard deviation, and quantiles being the most commonly used
 in practice. These are all easily calculated based on the sample
@@ -500,7 +512,7 @@ print &#39;estimated posterior sd = &#39; sd(theta) &#39;</code></pre>
    estimated posterior   sd = 0.13</code></pre>
 <p>The posterior mean and standard deviation are excellent marginal
 summary statistics for posterior quantities that have a roughly normal
-distribution.<label for="tufte-sn-128" class="margin-toggle sidenote-number">128</label><input type="checkbox" id="tufte-sn-128" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">128</span> Most posterior distributions we will consider approach
+distribution.<label for="tufte-sn-152" class="margin-toggle sidenote-number">152</label><input type="checkbox" id="tufte-sn-152" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">152</span> Most posterior distributions we will consider approach
 normality as more data is observed.</span> If the posterior distribution
 has very broad or narrow tails or is highly skewed, standard deviation
 and mean are less useful.</p>
@@ -509,7 +521,7 @@ functions to compute quantiles.</p>
 <pre><code>print &#39;estimated posterior median = &#39; quantile(theta, 0.5)
 print &#39;estimated posterior central 80 pct interval = &#39;
       quantiles(theta, { 0.1, 0.9 })</code></pre>
-<p>Running this produces the following.<label for="tufte-sn-129" class="margin-toggle sidenote-number">129</label><input type="checkbox" id="tufte-sn-129" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">129</span> The median is slightly lower
+<p>Running this produces the following.<label for="tufte-sn-153" class="margin-toggle sidenote-number">153</label><input type="checkbox" id="tufte-sn-153" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">153</span> The median is slightly lower
 than the mean, as they will be in right skewed distributions.</span></p>
 <pre><code>   estimated posterior median = 0.32
    estimated posterior central 90 pct interval = (0.17, 0.51)</code></pre>
@@ -529,7 +541,7 @@ within it, and choosing a central interval gives us an idea of the
 central part of the distribution.</p>
 </div>
 <div id="estimating-event-probabilities" class="section level2">
-<h2><span class="header-section-number">7.11</span> Estimating event probabilities</h2>
+<h2><span class="header-section-number">10.11</span> Estimating event probabilities</h2>
 <p>To answer the question about whether boys are more prevalent than
 girls, we need to estimate <span class="math inline">\(\mbox{Pr}[\theta &gt; 0.5]\)</span>, which is
 straightforward with simulation. As usual, we just count the number of
@@ -541,22 +553,22 @@ boys represent more than 50% of the live births is estimated, relative
 to the model, to be</p>
 <pre><code>   estimated Pr[theta &gt; 0.5] = 0.11</code></pre>
 <p>Now let’s overlay the median and central 90% interval.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-79"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-113"></span>
 <p class="caption marginnote shownote">
-Figure 7.3: Histogram of <span class="math inline">\(1\,000\,000\)</span> draws from the posterior <span class="math display">\[p(\theta \mid y, N) \propto \mbox{binomial}(y \mid N, \theta),\]</span> given <span class="math inline">\(N = 10, y = 3\)</span>. The median (50% quantile) is indicated with a dashed line and the boundaries of the central 90% interval (5% and 95% quantiles) are picked out with dotted lines. The proportion of the total area shaded to the right of 0.5 represents the posterior probability that <span class="math inline">\(\theta &gt; 0.5,\)</span> which is about 11%.
+Figure 10.3: Histogram of <span class="math inline">\(1\,000\,000\)</span> draws from the posterior <span class="math display">\[p(\theta \mid y, N) \propto \mbox{binomial}(y \mid N, \theta),\]</span> given <span class="math inline">\(N = 10, y = 3\)</span>. The median (50 percent quantile) is indicated with a dashed line and the boundaries of the central 90 percent interval (5 percent and 95 percent quantiles) are picked out with dotted lines. The proportion of the total area shaded to the right of 0.5 represents the posterior probability that <span class="math inline">\(\theta &gt; 0.5,\)</span> which is about 11 percent.
 </p>
-<img src="_main_files/figure-html/unnamed-chunk-79-1.png" alt="Histogram of $1\,000\,000$ draws from the posterior $$p(\theta \mid y, N) \propto \mbox{binomial}(y \mid N, \theta),$$ given $N = 10, y = 3$.  The median (50% quantile) is indicated with a dashed line and the boundaries of the central 90% interval (5% and 95% quantiles) are picked out with dotted lines.  The proportion of the total area shaded to the right of 0.5 represents the posterior probability that $\theta &gt; 0.5,$ which is about 11%." width="70%"  />
+<img src="_main_files/figure-html/unnamed-chunk-113-1.png" alt="Histogram of $1\,000\,000$ draws from the posterior $$p(\theta \mid y, N) \propto \mbox{binomial}(y \mid N, \theta),$$ given $N = 10, y = 3$.  The median (50 percent quantile) is indicated with a dashed line and the boundaries of the central 90 percent interval (5 percent and 95 percent quantiles) are picked out with dotted lines.  The proportion of the total area shaded to the right of 0.5 represents the posterior probability that $\theta &gt; 0.5,$ which is about 11 percent." width="90%"  />
 </div>
 </div>
 <div id="laplaces-data" class="section level2">
-<h2><span class="header-section-number">7.12</span> Laplace’s data</h2>
+<h2><span class="header-section-number">10.12</span> Laplace’s data</h2>
 <p>What happens if we use Laplace’s data, rather than our small data set,
 which had roughly 110 thousand male births and 105 thousand female?
 Let’s take some draws from the posterior <span class="math inline">\(p(\theta \mid y, N)\)</span> where
 <span class="math inline">\(y = 110\,312\)</span> boys out of <span class="math inline">\(N = 110\,312 + 105\,287\)</span> total births.
 We’ll take <span class="math inline">\(M = 1\,000\,000\)</span> simulations <span class="math inline">\(\theta^{(1)}, \ldots, \theta^{(M)}\)</span> here because they are cheap and we would like low
 sampling error.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-80-1.png" width="70%"  style="display: block; margin: auto;" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-114-1.png" width="90%"  style="display: block; margin: auto;" /></p>
 <p>The mean of the posterior sample is approximately 0.511, or a slightly
 higher than 51% chance of a male birth. The central 90% posterior
 interval calculated from quantiles of the sample is <span class="math inline">\((0.510, 0.513)\)</span>.</p>
@@ -569,10 +581,10 @@ approximately 0.506. The proportion of draws for which <span class="math inline"
 <p>As we have seen before, simulation-based estimates provide
 probabilistic guarantees about absolute tolerances. With <span class="math inline">\(100\,000\)</span>
 draws, we are sure that the answer is 1.0000 to within plus or minus
-0.0001 or less.<label for="tufte-sn-130" class="margin-toggle sidenote-number">130</label><input type="checkbox" id="tufte-sn-130" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">130</span> Tolerances can be calculated using the central limit
+0.0001 or less.<label for="tufte-sn-154" class="margin-toggle sidenote-number">154</label><input type="checkbox" id="tufte-sn-154" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">154</span> Tolerances can be calculated using the central limit
 theorem, which we will define properly when we introduce the normal
 distribution later.</span> We know the answer must be strictly less
-than one. Using some analytic techniques,<label for="tufte-sn-131" class="margin-toggle sidenote-number">131</label><input type="checkbox" id="tufte-sn-131" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">131</span> The cumulataive
+than one. Using some analytic techniques,<label for="tufte-sn-155" class="margin-toggle sidenote-number">155</label><input type="checkbox" id="tufte-sn-155" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">155</span> The cumulataive
 distribution function of the posterior, which is known to be the beta
 distribution <span class="math display">\[p(\theta \mid y, N) = \mbox{beta}(\theta \mid y + 1, N
 - y + 1).\]</span></span> the true estimate to within 27 decimal places is</p>
@@ -583,7 +595,7 @@ distribution <span class="math display">\[p(\theta \mid y, N) = \mbox{beta}(\the
 higher than that of a girl being born.</p>
 </div>
 <div id="inference-for-and-comparison-of-multiple-variables" class="section level2">
-<h2><span class="header-section-number">7.13</span> Inference for and comparison of multiple variables</h2>
+<h2><span class="header-section-number">10.13</span> Inference for and comparison of multiple variables</h2>
 <p>The first example of Laplace’s is simple in that it has only a single
 parameter of interest, <span class="math inline">\(\theta\)</span>, the probability of a male birth. Now
 we will consider a very similar model with two variables, so that we
@@ -637,16 +649,16 @@ print &#39;Pr[theta[1] &gt; theta[2] | y, M] = &#39; success / M</code></pre>
 <p>Let’s run that with <span class="math inline">\(M = 10\,000\)</span> simulations and see what we get:</p>
 <pre><code>   Pr[theta[1] &gt; theta[2] | y, M] = 0.52</code></pre>
 <p>Only about a 52% chance
-that Downtown Bakery is the better bet.<label for="tufte-sn-132" class="margin-toggle sidenote-number">132</label><input type="checkbox" id="tufte-sn-132" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">132</span> As much as this diner loves
-Downtown Bakery, the nod for food, ambience, and the existence of beer
-goes to La Delicias Mexicanas.</span></p>
+that Downtown Bakery is the better bet for a 5-star meal.<label for="tufte-sn-156" class="margin-toggle sidenote-number">156</label><input type="checkbox" id="tufte-sn-156" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">156</span> As much as
+this diner loves Downtown Bakery, the nod for food, ambience, and the
+existence of beer goes to La Delicias Mexicanas.</span></p>
 <p>To get a sense of the posterior, we can construct a histogram of
 posterior draws of <span class="math inline">\(\Delta = \Theta_1 - \Theta_2\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-116"></span>
 <p class="caption marginnote shownote">
-Figure 7.4: Histogram of posterior differences between probabilty of Downtown Bakery getting a 5-star review (<span class="math inline">\(\theta_1\)</span>) and that of La Delicias Mexicanas getting one (<span class="math inline">\(\theta_2\)</span>). The draws for which <span class="math inline">\(\delta &gt; 0\)</span> (equivalently, <span class="math inline">\(\theta_1 &gt; \theta_2\)</span>) are shaded darker. The area of the darker region divided by the total area is the estimate of the probability that Downtown Bakery is more likely to get a 5-star review than La Delicias Mexicanas.
+Figure 10.4: Histogram of posterior differences between probabilty of Downtown Bakery getting a 5-star review (<span class="math inline">\(\theta_1\)</span>) and that of La Delicias Mexicanas getting one (<span class="math inline">\(\theta_2\)</span>). The draws for which <span class="math inline">\(\delta &gt; 0\)</span> (equivalently, <span class="math inline">\(\theta_1 &gt; \theta_2\)</span>) are shaded darker. The area of the darker region divided by the total area is the estimate of the probability that Downtown Bakery is more likely to get a 5-star review than La Delicias Mexicanas.
 </p>
-<img src="_main_files/figure-html/unnamed-chunk-82-1.png" alt="Histogram of posterior differences between probabilty of Downtown Bakery getting a 5-star review ($\theta_1$) and that of La Delicias Mexicanas getting one ($\theta_2$).  The draws for which $\delta &gt; 0$ (equivalently, $\theta_1 &gt; \theta_2$) are shaded darker.  The area of the darker region divided by the total area is the estimate of the probability that Downtown Bakery is more likely to get a 5-star review than La Delicias Mexicanas." width="70%"  />
+<img src="_main_files/figure-html/unnamed-chunk-116-1.png" alt="Histogram of posterior differences between probabilty of Downtown Bakery getting a 5-star review ($\theta_1$) and that of La Delicias Mexicanas getting one ($\theta_2$).  The draws for which $\delta &gt; 0$ (equivalently, $\theta_1 &gt; \theta_2$) are shaded darker.  The area of the darker region divided by the total area is the estimate of the probability that Downtown Bakery is more likely to get a 5-star review than La Delicias Mexicanas." width="90%"  />
 </div>
 <p>There is substantial uncertainty, and only 52% of the draws lie to the
 right of zero. That is,</p>

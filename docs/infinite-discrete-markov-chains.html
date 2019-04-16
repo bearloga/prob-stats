@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="7 Infinite Discrete Markov Chains | Probability and Statistics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Bob Carpenter" />
+
+<meta name="date" content="2019-01-01" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="7 Infinite Discrete Markov Chains | Probability and Statistics">
+
+<title>7 Infinite Discrete Markov Chains | Probability and Statistics</title>
+
+<link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#preface">Preface</a></li>
+<li><a href="what-is-probability.html#what-is-probability">What is Probability?</a></li>
+<li><a href="random-variables-and-event-probabilities.html#random-variables-and-event-probabilities"><span class="toc-section-number">1</span> Random Variables and Event Probabilities</a></li>
+<li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
+<li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
+<li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="infinite-discrete-markov-chains" class="section level1">
+<h1><span class="header-section-number">7</span> Infinite Discrete Markov Chains</h1>
+<p>All of the Markov chains we have until now have had a finite number
+of states. In this chapter, we consider Markov chains with a
+countably infinite number of states. That is, they are still discrete,
+but can take on arbitrary integer values.</p>
+<div id="drunkards-walk" class="section level2">
+<h2><span class="header-section-number">7.1</span> Drunkard’s walk</h2>
+<p>The so-called <em>drunkard’s walk</em> is a non-trivial Markov chain which
+starts with value 0 and moves randomly right one step on the number
+line with probability <span class="math inline">\(\theta\)</span> and left one step with probability <span class="math inline">\(1 - \theta\)</span>.</p>
+<p>The initial value is required to be zero,</p>
+<p><span class="math display">\[
+p_{Y_1}(y_1) \ = \ 1 \ \mbox{ if } \ y_1 = 0.
+\]</span></p>
+<p>Subsequent values are generating with probability <span class="math inline">\(\theta\)</span> of adding
+one and probability <span class="math inline">\(1 - \theta\)</span> of subtracting one,</p>
+<p><span class="math display">\[
+p_{Y_{t+1} \mid Y_t}(y_{t+1} \mid y_t)
+\ = \
+\begin{cases}
+\theta &amp; \mbox{if } \ y_{t + 1} = y_t + 1, \mbox{and}
+\\[4pt]
+1 - \theta &amp; \mbox{if } \ y_{t + 1} = y_t - 1.
+\end{cases}
+\]</span></p>
+<p>Another way to formulate the drunkard’s walk is by setting <span class="math inline">\(Y_1 = 0\)</span>
+and setting subsequent values to</p>
+<p><span class="math display">\[
+Y_{t+1} = Y_t + 2 \times Z_t - 1.
+\]</span></p>
+<p>where <span class="math inline">\(Z_t \sim \mbox{bernoulli}(\theta).\)</span> Formulated this way, the
+drunkard’s walk <span class="math inline">\(Y\)</span> is a transform of the Bernoulli process <span class="math inline">\(Z\)</span>. We
+can simulate drunkard’s walks for <span class="math inline">\(\theta = 0.5\)</span> and <span class="math inline">\(\theta = 0.6\)</span>
+and see the trend over time.</p>
+<pre><code>y[1] = 0
+for (m in 2:M)
+  z[m] = bernoulli_rng(theta)
+  y[m] = y[m - 1] + (z[m] ? 1 : -1)</code></pre>
+<p>We’ll simulate from both processes for <span class="math inline">\(M = 1000\)</span> steps and plot.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-78"></span>
+<p class="caption marginnote shownote">
+Figure 7.1: Drunkard’s walks of 10,000 steps with equal chance of going left or right (blue) versus a sixty percent chance of going left (red). The dotted line is drawn at the starting point. As time progresses, the biased random walk drifts further and further from its starting point.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-78-1.png" alt="Drunkard's walks of 10,000 steps with equal chance of going left or right (blue) versus a sixty percent chance of going left (red).  The dotted line is drawn at the starting point. As time progresses, the biased random walk drifts further and further from its starting point." width="90%"  />
+</div>
+<p>For the balanced drunkard, the expected drift per step is zero as
+there is equal chance of going in either direction. After 10,000
+steps, the expected position of the balanced drunkard remains the
+origin.<label for="tufte-sn-105" class="margin-toggle sidenote-number">105</label><input type="checkbox" id="tufte-sn-105" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">105</span> Contrary to common language usage, the expected position
+being the origin after <span class="math inline">\(10\,000\)</span> steps does not imply that we should
+expect the drunkard to be at the origin. It is in fact very unlikely
+that the drunkard is at the origin after <span class="math inline">\(10\,000\)</span> steps, as it
+requires exactly <span class="math inline">\(5\,000\)</span> upward steps, the probability of which is
+<span class="math inline">\(\mbox{binomial}(5\,000 \mid 10\,000, 0.5) = 0.008.\)</span></span> For the
+unbalanced drunkard, the expected drift per step is <span class="math inline">\(0.6 \times 1 + 0.4 \times -1 = 0.2\)</span>. Thus after 10,000 steps, the drunkard’s
+expected position is <span class="math inline">\(0.2 \times 10\,000 = 2\,000.\)</span></p>
+</div>
+<div id="gamblers-ruin" class="section level2">
+<h2><span class="header-section-number">7.2</span> Gambler’s Ruin</h2>
+<p>Another classic problem which may be understood in the context of an
+infinite discrete Markov chain is the gambler’s ruin. Suppose a
+gambler sits down to bet with a pile of <span class="math inline">\(N\)</span> chips and is playing a
+game which costs one chip to play and returns one chip with a
+probability of <span class="math inline">\(\theta\)</span>.<label for="tufte-sn-106" class="margin-toggle sidenote-number">106</label><input type="checkbox" id="tufte-sn-106" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">106</span> The original formulation of the problem,
+involving two gamblers playing each other with finite stakes, was
+analyzed in Christiaan Huygens. 1657. <em>Van Rekeningh in Spelen van
+Geluck.</em> Here we assume one player is the bank with an unlimited
+stake.</span> The gambler is not allowed to go into debt, so if the
+gambler’s fortune ever sinks to zero, it remains that way in
+perpetuity. The results of the bets at times <span class="math inline">\(t = 1, 2, \ldots\)</span> can be
+modeled as an independent and identically distributed random process
+<span class="math inline">\(Z = Z_1, Z_2, \ldots\)</span> with</p>
+<p><span class="math display">\[
+Z_t \sim \mbox{bernoulli}(\theta).
+\]</span></p>
+<p>As usual, a successful bet is represented by <span class="math inline">\(Z_t = 1\)</span> and an
+unsuccessful one by <span class="math inline">\(Z_t = 0\)</span>. The gambler’s fortune can now be
+defined recursively as a time series <span class="math inline">\(Y = Y_1, Y_2, \ldots\)</span> in which the initial value is given by</p>
+<p><span class="math display">\[
+Y_1 = N
+\]</span></p>
+<p>with subsequent values defined recursively by</p>
+<p><span class="math display">\[
+Y_{n + 1}
+\ = \
+\begin{cases}
+0 &amp; \mbox{if} \ Y_n = 0, \ \mbox{and}
+\\[4pt]
+Y_n + Z_n &amp; \mbox{if} \ Y_n &gt; 0.
+\end{cases}
+\]</span></p>
+<p>Broken down into the language of Markov chains, we have an initial
+distribution concentrating all of its mass at the single point <span class="math inline">\(N\)</span>,
+with mass function</p>
+<p><span class="math display">\[
+p_{Y_1}(N) = 1.
+\]</span></p>
+<p>Each subsequent variable’s probability mass function is given by</p>
+<p><span class="math display">\[
+p_{Y_{t + 1} \mid Y_t}(y_{t + 1} \mid y_t)
+\ = \
+\begin{cases}
+\theta &amp; \mbox{if} \ y_{t + 1} = y_t + 1
+\\[4pt]
+1 - \theta &amp; \mbox{if} \ y_{t + 1} = y_t - 1.
+\end{cases}
+\]</span></p>
+<p>These mass functions are all identical in that <span class="math inline">\(p_{Y_{t+n+1} \mid Y_{t + n}} = p_{Y_{t + 1} \mid Y_t}.\)</span> In other words, <span class="math inline">\(Y\)</span> is a
+time-homogeneous Markov chain.</p>
+<p>We are interested in two questions pertaining to the gambler. First,
+what is their expected fortune at each time <span class="math inline">\(t\)</span>? Second, what is the
+probability that they have fortune zero at time <span class="math inline">\(t\)</span>.<label for="tufte-sn-107" class="margin-toggle sidenote-number">107</label><input type="checkbox" id="tufte-sn-107" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">107</span> A gambler whose
+fortune goes to zero is said to be <em>ruined.</em></span> Both of these
+calculations have simple simulation-based estimates.</p>
+<p>Let’s start with expected fortune and look out <span class="math inline">\(T = 100\)</span> steps.
+Suppose the chance of success on any given bet is <span class="math inline">\(\theta\)</span> and their
+initial fortune is <span class="math inline">\(N\)</span>. The simulation of the gambler’s fortune is
+just a straightforward coding of the time series.</p>
+<pre><code>y[1] = N
+for (t in 2:T)
+  z[t] = bernoulli_rng(theta)
+  y[t] = y[t - 1] + (z[t] ? 1 : -1)</code></pre>
+<p>Now if we simulate that entire process <span class="math inline">\(M\)</span> times, we can calculate
+the expected fortune as an average at each time <span class="math inline">\(t \in 1:T\)</span>.</p>
+<pre><code>for (m in 1:M)
+  y(m)[t] = N
+  for (t in 2:T)
+    z(m)[t] = bernoulli_rng(theta)
+    y(m)[t] = y(m)[t - 1] + (z[t] ? 1 : -1)
+for (t in 1:T)
+  expected_fortune[t] = mean(y(1:M)[t])</code></pre>
+<p>Let’s run <span class="math inline">\(M = 10\,000\)</span> simulations for <span class="math inline">\(T = 50\)</span> starting with a stake
+of <span class="math inline">\(N = 5\)</span> with several values of <span class="math inline">\(\theta\)</span> and plot the expected
+fortunes.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-79"></span>
+<p class="caption marginnote shownote">
+Figure 7.2: Expected returns for gambler starting with stake <span class="math inline">\(N\)</span> and having a <span class="math inline">\(\theta\)</span> chance at each time point of increasing their fortune by 1 and a <span class="math inline">\(1 - \theta\)</span> chance of reducing their fortune by 1. The horizontal dotted line is at the initial fortune and the dashed line is at zero.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-79-1.png" alt="Expected returns for gambler starting with stake $N$ and having a $\theta$ chance at each time point of increasing their fortune by 1 and a $1 - \theta$ chance of reducing their fortune by 1.  The horizontal dotted line is at the initial fortune and the dashed line is at zero." width="90%"  />
+</div>
+<p>Next, we’ll tackle the problem of estimating the probability that a
+gambler has been run out of money at time <span class="math inline">\(t\)</span>. In symbols, we are
+going to use simulations <span class="math inline">\(y^{(1)}, \ldots, y^{(M)}\)</span> of the gambler’s
+time series,</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+\mbox{Pr}[Y_t = 0]
+&amp; = &amp;
+\mathbb{E}\left[ \mathrm{I}\left[ Y_t = 0 \right] \right].
+\\[6pt]
+&amp; \approx &amp;
+\displaystyle
+\frac{1}{M} \sum_{m = 1}^M \, \mathrm{I}\left[ y_t^{(m)} = 0 \right].
+\end{array}
+\]</span></p>
+<p>This last term can be directly calculated by adding the indicator
+variables to the calculations before.</p>
+<pre><code>for (m in 1:M)
+  y(m)[t] = N
+  for (t in 2:T)
+    z(m)[t] = bernoulli_rng(theta)
+    y(m)[t] = y(m)[t - 1] + (z[t] ? 1 : -1)
+    ruined(m)[t] = (y(m)[t] == 0)
+for (t in 1:T)
+  estimated_pr_ruin[t] = mean(ruined(1:M)[t])</code></pre>
+<p>So let’s run that and plot the probability of ruin for the same three
+choices of <span class="math inline">\(\theta\)</span>, using <span class="math inline">\(M = 5\,000\)</span> simulations. But this time,
+we’ll run for <span class="math inline">\(T = 200\)</span> time steps.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-80"></span>
+<p class="caption marginnote shownote">
+Figure 7.3: Probability of running out of money for a gambler starting with stake <span class="math inline">\(N\)</span> and having a <span class="math inline">\(\theta\)</span> chance at each time point of increasing their fortune by 1 and a <span class="math inline">\(1 - \theta\)</span> chance of reducing their fortune by 1. The horizontal dotted line is at 100 percent.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-80-1.png" alt="Probability of running out of money for a gambler starting with stake $N$ and having a $\theta$ chance at each time point of increasing their fortune by 1 and a $1 - \theta$ chance of reducing their fortune by 1.  The horizontal dotted line is at 100 percent." width="90%"  />
+</div>
+<p>Even in a fair game, after 50 bets, there’s nearly a 50% chance that
+a gambler starting with a stake of 5 is ruined; this probabiltiy goes
+up to nearly 75% after 200 bets.</p>
+</div>
+<div id="queueing" class="section level2">
+<h2><span class="header-section-number">7.3</span> Queueing</h2>
+<p>Suppose we have a checkout line at a store (that is open 24 hours a
+day, 7 days a week) and a single clerk. The store has a queue, where
+customers line up for service. The queue begins empty. Each hour a
+random number of customers arrive and a random number of customers are
+served. Unserved customers remain in the queue until they are served.</p>
+<p>To make this concrete, suppose we let <span class="math inline">\(U_t \in 0, 1, \ldots\)</span> be the
+number of customers that arrive during hour <span class="math inline">\(t\)</span> and that it has a
+binomial distribution,</p>
+<p><span class="math display">\[
+U_t \sim \mbox{binomial}(1000, 0.005).
+\]</span></p>
+<p>Just to provide some idea of what this looks like, here are 20
+simulated values,</p>
+<pre><code>    7  0  3  4  4  3  3  7  2  4  6  7  6  4  5  7  2  4  3  6</code></pre>
+<p>We can think of this as 1000 potential customers, each of which has a
+half percent chance of deciding to go to the store any hour. If we
+repeat, the mean number of arrivals is 5 and the standard deviation is
+2.2.</p>
+<p>Let’s suppose that a cleark can serve up to <span class="math inline">\(V_t\)</span> customers per hour,
+determined by the clerk’s rate <span class="math inline">\(\phi\)</span>,</p>
+<p><span class="math display">\[
+V_t \sim \mbox{binomial}(1000, \phi).
+\]</span></p>
+<p>If <span class="math inline">\(\phi &lt; 0.005,\)</span> there is likely to be trouble. The clerk
+won’t be able to keep up on average.</p>
+<p>The simulation code just follows the definitions.</p>
+<pre><code>queue[1] = 0
+for (t in 2:T)
+  arrive[t] = binomial_rng(1000, 0.005)
+  serve[t] = binomial_rng(1000, phi)
+  queue[t] = max(0, queue[t - 1] + arrive[t] - serve[t])</code></pre>
+<p>The <code>max(0, ...)</code> is to make sure the queue never gets negative. If
+the number served is greater than the total number of arrivals and
+customers in the queue, the queue starts empty the next time step.</p>
+<p>Let’s try different values of <span class="math inline">\(\phi\)</span>, the average server rate, and
+plot two weeks of service.<label for="tufte-sn-108" class="margin-toggle sidenote-number">108</label><input type="checkbox" id="tufte-sn-108" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">108</span> <span class="math inline">\(24 \mbox{hours/day} \ \times 14 \
+\mbox{days} = 336 \mbox{hours}\)</span></span></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
+<p class="caption marginnote shownote">
+Figure 7.4: Multiple simulations of queue size versus time for a queue with <span class="math inline">\(\mbox{binomial}(1000, 0.005)\)</span> customers arriving per hour (an average of 5), and a maximum of <span class="math inline">\(\mbox{binomial}(1000, \phi)\)</span> customers served per hour, plotted for various <span class="math inline">\(\phi\)</span> (as indicated in the row labels).
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-82-1.png" alt="Multiple simulations of queue size versus time for a queue with $\mbox{binomial}(1000, 0.005)$ customers arriving per hour (an average of 5), and a maximum of $\mbox{binomial}(1000, \phi)$ customers served per hour, plotted for various $\phi$ (as indicated in the row labels)." width="90%"  />
+</div>
+<p>As can be seen in the plot, the queue not growing out of control is very sensitive to the average service rate per hour. At an average rate of five cusotmers served per hour (matching the average customer intake), the queue quickly grows out of control. With as few as five and a half customers served per hour, on average, it becomes stable long term; with seven customers served per hour, things settle down considerably. When the queue goes up to 50 people, as it does with <span class="math inline">\(\phi = 0.0055\)</span>, wait times are over ten hours. Because of the cumulative nature of queues, a high server capacity is required to deal with spikes in customer arrival.</p>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="stationary-distributions-and-markov-chains.html"><button class="btn btn-default">Previous</button></a>
+<a href="continuous-random-variables.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

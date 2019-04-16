@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="21 Exponential and Poisson Distributions | Probability and Statistics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Bob Carpenter" />
+
+<meta name="date" content="2019-01-01" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="21 Exponential and Poisson Distributions | Probability and Statistics">
+
+<title>21 Exponential and Poisson Distributions | Probability and Statistics</title>
+
+<link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#preface">Preface</a></li>
+<li><a href="what-is-probability.html#what-is-probability">What is Probability?</a></li>
+<li><a href="random-variables-and-event-probabilities.html#random-variables-and-event-probabilities"><span class="toc-section-number">1</span> Random Variables and Event Probabilities</a></li>
+<li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
+<li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
+<li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="exponential-and-poisson-distributions" class="section level1">
+<h1><span class="header-section-number">21</span> Exponential and Poisson Distributions</h1>
+<p>In this chapter, we’ll see how the exponential distribution can be
+used to model the waiting time between events. For example, waiting
+times might be used to model the time between salmon swimming
+upstream, the rate at which a user sends text messages, or the time
+between neutrinos arriving at a particle detector.</p>
+<p>The Poisson distribution arises as the number of events in a fixed
+period of time, such as the number of salmon per hour or number of
+messages per day.<label for="tufte-sn-241" class="margin-toggle sidenote-number">241</label><input type="checkbox" id="tufte-sn-241" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">241</span> We also consider generalizations to spatial and
+volumetric processes, such as the number of graffiti tags in given
+area of a city or the number of whales in a volume of the ocean.
+These may even be combined to model, say, the number of whales in a
+volume of the ocean in a given month.</span></p>
+<div id="the-exponential-distribution" class="section level2">
+<h2><span class="header-section-number">21.1</span> The Exponential distribution</h2>
+<p>The exponential distribution can be used to model the waiting time
+between events under two idealized assumptions. The first assumption
+is that the arrival process is homogeneous in time. No matter the
+time of day or night, arrivals happen at the same rate.<label for="tufte-sn-242" class="margin-toggle sidenote-number">242</label><input type="checkbox" id="tufte-sn-242" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">242</span> Obviously,
+this is too limiting for many applications, such as anything to do
+with human or animal activity; in such cases, these simple processes
+are used as building blocks in more complex spatio-temporal models.</span>
+The second assumption is that the times between successive events is
+independent. It doesn’t matter if it’s been an hour since the last
+text message was sent or if one was just sent ten seconds ago, the
+probability another message will arrive in the next minute is the
+same. In other words, the expected waiting time for the next arrival
+doesn’t change based on how long you’ve already been waiting.</p>
+<p>A distribution of arrival times satisfying these properties is the
+exponential distribution. If <span class="math inline">\(Y \sim \mbox{exponential}(1)\)</span> has a standard
+exponential distribution, then its density has a particularly simple
+form<label for="tufte-sn-243" class="margin-toggle sidenote-number">243</label><input type="checkbox" id="tufte-sn-243" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">243</span> We can work backward from this density to the definite integral
+<span class="math display">\[\int_0^{\infty} \exp(-y) = 1.\]</span></span></p>
+<p><span class="math display">\[
+p_Y(y) = \exp(-y).
+\]</span></p>
+<p>For example, let’s plot a few simulations of arrivals where the
+waiting time between arrivals is distributed according to a standard
+exponential distribution.<label for="tufte-sn-244" class="margin-toggle sidenote-number">244</label><input type="checkbox" id="tufte-sn-244" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">244</span> We will circle back and explain how to
+generate exponential variates shortly.</span></p>
+<p>We can simulate a sequence of arrivals during <span class="math inline">\(\lambda\)</span> time units,
+assuming the waiting time between arrivals is distributed as standard
+exponential. We start at time <span class="math inline">\(t = 0\)</span> and continue adding the waiting
+times <span class="math inline">\(w_n \sim \mbox{exponential}(1)\)</span> until we pass a time <span class="math inline">\(\lambda\)</span>,
+at which point we return the arrival times we have accumulated.<label for="tufte-sn-245" class="margin-toggle sidenote-number">245</label><input type="checkbox" id="tufte-sn-245" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">245</span> The
+loop notation <code>1:infinity</code> is meant to indicate that <code>n</code> is
+unbounded. Such “forever” loops must be broken with internal logic
+such as the return in this case.</span></p>
+<pre><code>t = 0
+for n in 1:infinity
+  w[n] = exponential_rng(1)
+  t += w[n]
+  if (t &gt; lambda)
+    return y
+  y[n] = t</code></pre>
+<p>Let’s look at four realizations of this process up to time <span class="math inline">\(\lambda = 10\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-152"></span>
+<p class="caption marginnote shownote">
+Figure 21.1: Four simulations of the first <span class="math inline">\(\lambda = 10\)</span> time units of an arrival process where waiting times are distributed as <span class="math inline">\(\mbox{exponential}(1)\)</span>.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-152-1.png" alt="Four simulations of the first $\lambda = 10$ time units of an arrival process where waiting times are distributed as $\mbox{exponential}(1)$." width="90%"  />
+</div>
+<p>A different number of arrivals occur in the different simulations.</p>
+</div>
+<div id="scaled-exponential" class="section level2">
+<h2><span class="header-section-number">21.2</span> Scaled exponential</h2>
+<p>As with any continuous distribution, the exponential may be scaled.
+As with scaling the normal distribution, this simply stretches or
+shrinks the distribution without changing its basic shape. In the
+normal distribution, the scale parameter <span class="math inline">\(\sigma\)</span> multiplies a
+standard normal variate to get a scale <span class="math inline">\(\sigma\)</span> variate. Instead of
+multiplying a standard exponential variate by a scale, it is
+traditional to divide it by a rate (an inverse scale).</p>
+<p>If <span class="math inline">\(U \sim \mbox{exponential}(1)\)</span> is a standard exponential variable,
+then <span class="math inline">\(Y = U / \lambda\)</span> is an exponential variable with rate <span class="math inline">\(\lambda\)</span>
+(i.e., with scale <span class="math inline">\(1 / \lambda\)</span>), for which we write <span class="math inline">\(Y \sim \mbox{exponential}(\lambda)\)</span>, and have the following<label for="tufte-sn-246" class="margin-toggle sidenote-number">246</label><input type="checkbox" id="tufte-sn-246" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">246</span> This is a
+straightforward derivation using the usual Jacobian formula, for which
+the adjustment for the inverse transform is <span class="math display">\[\Big| \,
+\frac{\mathrm{d}}{\mathrm{d} y} \lambda \times y \, \Big| =
+\lambda.\]</span></span></p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+p_Y(y \mid \lambda)
+&amp; = &amp;
+\lambda \times p_U\left( \lambda \times y \right)
+\\[6pt]
+&amp; = &amp;
+\lambda \times \exp \left(\lambda \times - y \right).
+\end{array}
+\]</span></p>
+</div>
+<div id="simulating-from-the-exponential-distribution" class="section level2">
+<h2><span class="header-section-number">21.3</span> Simulating from the exponential distribution</h2>
+<p>Simulating a standard exponential variate is straightforward because
+of the simple form of the cumulative distribution function. If <span class="math inline">\(Y \sim \mbox{exponential}(1)\)</span>, then the probability density function is
+<span class="math inline">\(p_Y(y) = \exp(-y)\)</span> and the cumulative distribution function <span class="math inline">\(F_Y : [0, \infty) \rightarrow [0, 1)\)</span> is given by</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+F_Y(y) &amp; = &amp; \int_0^y \exp(-v&#39;) \mbox{d}v
+\\[4pt]
+&amp; = &amp; 1 - \exp(-y).
+\end{array}
+\]</span></p>
+<p>This function is easily inverted to produce the inverse cumulative
+distribution function, <span class="math inline">\(F_y^{-1}:[0,1) \rightarrow [0, \infty)\)</span>,</p>
+<p><span class="math display">\[
+F_Y^{-1}(u) = - \log (1 - u).
+\]</span></p>
+<p>If we take <span class="math inline">\(U \sim \mbox{uniform}(0,1)\)</span>, then</p>
+<p><span class="math display">\[
+F_Y^{-1}(u) \sim \mbox{exponential}(1).
+\]</span></p>
+<p>This is a very general trick for distributions for which we can
+compute the inverse cumulative distribution function. We first saw
+this used to generate logistic variates by log-odds transforming
+uniform variates.<label for="tufte-sn-247" class="margin-toggle sidenote-number">247</label><input type="checkbox" id="tufte-sn-247" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">247</span> The log-odds function, written <span class="math inline">\(\mbox{logit}(u)\)</span>,
+is the inverse cumulative distribution function for the standard
+logistic distribution.</span></p>
+<p>The pseudocode follows the math, so we can generate standard
+exponential variates as follows.</p>
+<pre><code>u &lt;- uniform(0, 1)
+y &lt;- -log(1 - u)</code></pre>
+<p>It is traditional here to replace the term <span class="math inline">\(\log 1 - u\)</span> with the term
+<span class="math inline">\(\log u\)</span> because if <span class="math inline">\(u \sim \mbox{uniform}(0,1)\)</span>, then we also know <span class="math inline">\(1 - u \sim \mbox{uniform}(0,1)\)</span>. We can then generalize to the
+nonstandard exponential with rate (i.e., inverse scale) <span class="math inline">\(\lambda\)</span> by
+dividing. This gives us the following exponential distribution
+pseudorandom number generator.</p>
+<pre><code>exponential_rng(lambda)
+  u &lt;- uniform(0, 1)
+  y &lt;- -log(u) / lambda
+  return y</code></pre>
+</div>
+<div id="memorylessness-of-exponential-waiting-times" class="section level2">
+<h2><span class="header-section-number">21.4</span> Memorylessness of exponential waiting times</h2>
+<p>Suppose we simulate a sequence standard exponential waiting times,
+<span class="math inline">\(W_1, \ldots, W_N \sim \mbox{exponential}(1).\)</span> Now what if we look at
+the distribution of all of the <span class="math inline">\(W\)</span> and compare it to the distribution
+of just those <span class="math inline">\(W &gt; 1\)</span> and those <span class="math inline">\(W &gt; 2.5\)</span>. To make sure we have the
+same number of draws so the histograms are scaled, we’ll take 1000 of
+each situations by using simple rejection sampling.</p>
+<pre><code>for (m in 1:M)
+  w[m] = -1
+  while (w[m] &lt; min)
+    w[m] = exponential_rng(1)</code></pre>
+<p>Let’s plot histograms of <span class="math inline">\(10\,000\)</span> draws for <span class="math inline">\(\mbox{min} = 0, 1, 2.5\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-153"></span>
+<p class="caption marginnote shownote">
+Figure 21.2: Plot of <span class="math inline">\(10\,000\)</span> draws from the standard exponential distribution (left) and discarding all draws below 1 (center) or 2.5 (right). Each histogram is the same, just shifted. This illustrates the memoryless of the exponential distribution as a model of waiting times—no matter how long you have already waited, the remaining wait time distribution is the same.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-153-1.png" alt="Plot of $10\,000$ draws from the standard exponential distribution (left) and discarding all draws below 1 (center) or 2.5 (right).  Each histogram is the same, just shifted.  This illustrates the memoryless of the exponential distribution as a model of waiting times---no matter how long you have already waited, the remaining wait time distribution is the same." width="90%"  />
+</div>
+<p>The resulting histograms are almost identical because each condition
+has exactly the same distribution shifted over by the amount of wait
+time already experienced.</p>
+<p>We can characterize this property in terms of the probability density
+function. If <span class="math inline">\(Y \sim \mbox{exponential}(\lambda)\)</span>, for some fixed
+<span class="math inline">\(\lambda\)</span>, then for any fixed <span class="math inline">\(c &gt; 0\)</span>, we have</p>
+<p><span class="math display">\[
+p_Y(y \mid \lambda)
+\ \propto \
+p_Y(y + c \mid \lambda).
+\]</span></p>
+</div>
+<div id="the-poisson-distribution" class="section level2">
+<h2><span class="header-section-number">21.5</span> The Poisson distribution</h2>
+<p>The Poisson distribution is a discrete distribution over counts
+<span class="math inline">\(\mathbb{N} = 0, 1, 2, \ldots\)</span> which can be defined as the number of
+arrivals that occur in a fixed unit <span class="math inline">\(\lambda\)</span> of time when the
+waiting times <span class="math inline">\(w_n\)</span> between arrivals are independently standard exponential
+distributed, <span class="math inline">\(w_n \sim \mbox{exponential}(1).\)</span></p>
+<p>If <span class="math inline">\(Y \sim \mbox{Poisson}(\lambda)\)</span>, then we can simulate values of
+<span class="math inline">\(Y\)</span> as follows.</p>
+<pre><code>poisson_rng(lambda)
+  t = 0
+  y = 0
+  while (true)
+    w = exponential_rng(1)
+    t += w
+    if (t &gt; lambda)
+      return y
+    else
+      y += 1</code></pre>
+<p>We start at time <span class="math inline">\(t = 0\)</span>, with <span class="math inline">\(y = 0\)</span> arrivals, then continue
+simulating arrivals until we have past the total time <span class="math inline">\(\lambda\)</span>, at
+which point we report the number of arrivals we have seen before the
+arrival that put us past time <span class="math inline">\(\lambda.\)</span></p>
+<p>We can use this simulator to estimate the expectation and variance of
+a variable <span class="math inline">\(Y \sim \mbox{Poisson}(\lambda)\)</span>, as follows</p>
+<pre><code>for (m in 1:M)
+  y[m] = poisson_rng(lambda)
+print &#39;estimated E[Y] = &#39; mean(y)
+print &#39;estimated var[Y] = &#39; variance(y)</code></pre>
+<pre><code>   estimated E[Y] = 9.98
+   estimated var[Y] = 9.96</code></pre>
+</div>
+<div id="poisson-as-limit-of-binomials" class="section level2">
+<h2><span class="header-section-number">21.6</span> Poisson as limit of binomials</h2>
+<p>Another way to arrive at the Poisson distribution is as the limit of a
+sequence of binomial distributions. A random variable with a Poisson
+distribution is unbounded in that any value may arise.<label for="tufte-sn-248" class="margin-toggle sidenote-number">248</label><input type="checkbox" id="tufte-sn-248" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">248</span> All but a few
+values will be wildly improbable, but still possible.</span> A binomial
+variable on the other hand takes on values between 0 and <span class="math inline">\(N\)</span> for some
+fixed <span class="math inline">\(N\)</span>. But if we let that the total count <span class="math inline">\(N\)</span> grows without bound
+while keeping the expected value at <span class="math inline">\(\lambda\)</span>, the binomial approaches
+the Poisson distribution,</p>
+<p><span class="math display">\[
+\mbox{Poisson}(y \mid \lambda)
+= \lim_{N \rightarrow \infty} \mbox{binomial}(N, \lambda / N).
+\]</span></p>
+<p>We can see what the binomial approximation looks like through
+simulation. We’ll simulate <span class="math inline">\(\mbox{binomial}(N, 5.5 / N)\)</span> for various
+<span class="math inline">\(N\)</span> and compare with <span class="math inline">\(\mbox{Poisson}(5.5)\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-155"></span>
+<p class="caption marginnote shownote">
+Figure 21.3: Histograms of <span class="math inline">\(1\,000\,000\)</span> draws for a <span class="math inline">\(\mbox{Poisson}(5.5)\)</span> and successively larger <span class="math inline">\(N\)</span> binomial approximations.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-155-1.png" alt="Histograms of $1\,000\,000$ draws for a $\mbox{Poisson}(5.5)$ and successively larger $N$ binomial approximations." width="90%"  />
+</div>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="monitoring-approximate-convergence.html"><button class="btn btn-default">Previous</button></a>
+<a href="conjugate-priors.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

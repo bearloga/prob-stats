@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="18 Markov Chain Monte Carlo Methods | Probability and Statistics" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Bob Carpenter" />
+
+<meta name="date" content="2019-01-01" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="18 Markov Chain Monte Carlo Methods | Probability and Statistics">
+
+<title>18 Markov Chain Monte Carlo Methods | Probability and Statistics</title>
+
+<link href="libs/tufte-css/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css/tufte.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#preface">Preface</a></li>
+<li><a href="what-is-probability.html#what-is-probability">What is Probability?</a></li>
+<li><a href="random-variables-and-event-probabilities.html#random-variables-and-event-probabilities"><span class="toc-section-number">1</span> Random Variables and Event Probabilities</a></li>
+<li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
+<li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
+<li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="markov-chain-monte-carlo-methods" class="section level1">
+<h1><span class="header-section-number">18</span> Markov Chain Monte Carlo Methods</h1>
+<div id="monte-carlo-methods" class="section level2">
+<h2><span class="header-section-number">18.1</span> Monte Carlo Methods</h2>
+<p><em>Monte Carlo methods</em><label for="tufte-sn-223" class="margin-toggle sidenote-number">223</label><input type="checkbox" id="tufte-sn-223" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">223</span> Monte Carlo methods are so-called because of
+the Monte Carlo Casino (shown below), located in the Principality of
+Monaco. <br />   <br /> <img src="img/mc-casino.jpg" /> <span style="float:right; font-size:60%; color:#999999;">© Z.graber,
+own work, CC-BY-SA 3.0</span></span> simply use simulation to calculate
+numerical solutions to definite integrals, usually in high
+dimensions.<label for="tufte-sn-224" class="margin-toggle sidenote-number">224</label><input type="checkbox" id="tufte-sn-224" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">224</span> The book could’ve been subtitled “A Monte Carlo
+approach,” but like putting “Bayesian” before “statistics”, it’s
+needlessly obscure nomenclature.</span> We have seen numerous examples in
+earlier chapters.</p>
+<p>When we can simulate a sample of independent draws <span class="math inline">\(\theta = \theta^{(1)}, \ldots, \theta^{(M)}\)</span> according to the posterior
+<span class="math inline">\(p(\theta \mid y)\)</span>, we can use them to calculate parameter estimates,
+event probabilities, and other expectations. The convergence of such
+estimates is governed by the central limit theorem and proceeds at an
+expected error rate of <span class="math inline">\(\mathcal{O}(\frac{1}{\sqrt{M}}).\)</span><label for="tufte-sn-225" class="margin-toggle sidenote-number">225</label><input type="checkbox" id="tufte-sn-225" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">225</span> The
+reduction in error is all relative to the scale of the quantity being
+sampled.</span> This rate is manageable in most circumstances, but cannot
+be used for high precision applications because the number of
+iterations required for a given number of decimals of precision grows
+exponentially.<label for="tufte-sn-226" class="margin-toggle sidenote-number">226</label><input type="checkbox" id="tufte-sn-226" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">226</span> Each additional decimal digit requires the error to be
+reduced by a factor of 10, and thus requires 100 times as much
+computation, because <span class="math inline">\(\frac{1}{\sqrt{100}} = \frac{1}{10}\)</span>.</span></p>
+</div>
+<div id="markov-chain-monte-carlo-methods-1" class="section level2">
+<h2><span class="header-section-number">18.2</span> Markov chain Monte Carlo methods</h2>
+<p>For most statistical models we want to fit for applications, no
+methods exist for taking independent draws from the posterior. What
+we can do in most cases is create a Markov chain <span class="math inline">\(\theta = \theta^{(1)}, \ldots, \theta^{(M)}\)</span> of draws, the stationary
+distribution of which is the posterior <span class="math inline">\(p(\theta \mid y)\)</span> of
+interest. We then use the elements of the chain <span class="math inline">\(\theta\)</span> to estimate
+expectations and quantiles in the same way as the independent sample
+from the posterior. This is the basis of Markov chain Monte Carlo
+(MCMC) methods.</p>
+<p>As we saw in the chapter on finite Markov chains, the rate of
+convergence varies depending on how much each draw <span class="math inline">\(\theta^{(m + 1)}\)</span>
+depends on the previous draw <span class="math inline">\(\theta^{(m)}\)</span>.<label for="tufte-sn-227" class="margin-toggle sidenote-number">227</label><input type="checkbox" id="tufte-sn-227" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">227</span> If the <span class="math inline">\(\theta^{(m)}\)</span>
+are independent, the central limit theorem governs the convergence.</span></p>
+</div>
+<div id="continuous-state-markov-chains" class="section level2">
+<h2><span class="header-section-number">18.3</span> Continuous-state Markov chains</h2>
+<p>The definitions we have already made for Markov chains apply to chains
+with continuous values. A random process $Y = Y_1, Y_2, , $ has
+discrete time steps but may have discrete or continuous values or even
+multivariate values, which may themselves be discrete, continuous, or
+a mixture of the two. Such a process is a <em>Markov chain</em> if for all
+<span class="math inline">\(t\)</span>, and all states <span class="math inline">\(y_1, \ldots, y_{t+1}\)</span>,</p>
+<p><span class="math display">\[
+p_{Y_{t+1} \mid Y_t}(y_{t+1} \mid y_t)
+\ = \
+p_{Y_{t+1} \mid Y_t, Y_{t-1}, \ldots, Y_1}(y_{t+1} \mid y_t, y_{t-1}, \ldots, y_1).
+\]</span></p>
+<p>We are also assuming that our Markov chains are <em>time homogeneous</em> in
+that the conditional probability distribution of the next state is
+always the same. That means that for all <span class="math inline">\(t&#39;\)</span>, the conditional
+distribution of the next element at <span class="math inline">\(t\)</span> is the same as that at <span class="math inline">\(t&#39;\)</span>,</p>
+<p><span class="math display">\[
+p_{Y_{t+1} \mid Y_t}
+\ = \
+p_{Y_{t&#39; + 1} \mid Y_{t&#39;}}.
+\]</span></p>
+<p>All of the Markov chains we will consider will have transitions that
+are time homogeneous.</p>
+<p>To simplify notation, we will write
+<span class="math inline">\(p_t\)</span> for <span class="math inline">\(p_{Y_{t+1} \mid Y_t}\)</span></p>
+</div>
+<div id="stationary-distributions-1" class="section level2">
+<h2><span class="header-section-number">18.4</span> Stationary distributions</h2>
+<p>Let’s look at univariate continuous Markov chains first. Such a chain
+has real-valued states <span class="math inline">\(Y_t \in \mathbb{R}\)</span>. Let</p>
+<p><span class="math display">\[
+\tau(u, v) = p_{Y_{t+1} \mid Y_{t}}(v \mid u)
+\]</span></p>
+<p>be the conditional distribution of the next state <span class="math inline">\(v\)</span> if the current
+state is <span class="math inline">\(u\)</span>, where <span class="math inline">\(u, v \in \mathbb{R}\)</span>. We will call <span class="math inline">\(\tau\)</span> the
+transition distribution of the chain.</p>
+<p>A density function <span class="math inline">\(\pi(u)\)</span> for <span class="math inline">\(u \in \mathbb{R}\)</span> is the density
+function of the <em>stationary distribution</em> for transition function
+<span class="math inline">\(\tau(u, v)\)</span> if</p>
+<p><span class="math display">\[
+\pi(u)
+\ = \
+\int_{\mathbb{R}}
+\, \pi(v) \times \tau(v, u)
+\, \mathrm{d}v.
+\]</span></p>
+<p>In words, <span class="math inline">\(\pi\)</span> is a stationary density if its value at a point <span class="math inline">\(u\)</span> is
+the the average transition probability <span class="math inline">\(\tau(v, u)\)</span>, where the average
+is weighted by the stationary density of <span class="math inline">\(v\)</span>.</p>
+<p>In order to sample from the posterior of a model with posterior
+density <span class="math inline">\(p(\theta \mid y)\)</span> with parameters <span class="math inline">\(\theta\)</span> conditioned on
+observed data <span class="math inline">\(y\)</span>, we will construct Markov chains for which</p>
+<p><span class="math display">\[
+\pi(\theta) = p(\theta \mid y).
+\]</span></p>
+<p>We can also think of continuous Markov chains in terms of volumes. No
+matter how the space is partitioned into disjoint volumes, the
+probabilities of being in a volume and transitioning between volumes
+defines a discrete Markov chain.<label for="tufte-sn-228" class="margin-toggle sidenote-number">228</label><input type="checkbox" id="tufte-sn-228" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">228</span> The stationary probability of a
+volume <span class="math inline">\(U \subseteq \mathbb{R}^N\)</span> is just <span class="math display">\[\pi(U) = \int_U \pi(u)
+\mathrm{d}u.\]</span> and the probability of transitioning to volume <span class="math inline">\(V \subseteq \mathbb{R}^N\)</span> conditioned on being at state <span class="math inline">\(u \in \mathbb{R}^N\)</span> is given by <span class="math display">\[\tau(u, V) = \int_V \pi(v) \tau(u, v)
+\mathrm{d}v.\]</span></span></p>
+</div>
+<div id="reversibility-1" class="section level2">
+<h2><span class="header-section-number">18.5</span> Reversibility</h2>
+<p>The notion of reversibility extends to continuous chains, where <span class="math inline">\(\tau\)</span>
+is said to be <em>reversible</em> with respect to <span class="math inline">\(\pi\)</span> if for all <span class="math inline">\(u, v\)</span>,</p>
+<p><span class="math display">\[
+\pi(u) \times \tau(u, v) = \pi(v) \times \tau(v, u).
+\]</span></p>
+<p>If the transition function of a Markov chain is reversible with
+respect to <span class="math inline">\(\pi\)</span>, then <span class="math inline">\(\pi\)</span> is the stationary distribution for the
+chain. The other way around, not every transition function with a
+stationary distribution is reversible.</p>
+</div>
+<div id="periodic-chains-1" class="section level2">
+<h2><span class="header-section-number">18.6</span> Periodic chains</h2>
+<p>Continuous chains may exhibit periodicity just like discrete chains.
+The idea is that it revisits volumes in a predictable way. For
+example, consider a chain where the space has been divided into four
+non-overlapping regions <span class="math inline">\(A, B, C, D\)</span>, and where</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+\mbox{Pr}[Y_{t+1} \in B \mid Y_t \in A] &amp; = &amp; 1
+\\[4pt]
+\mbox{Pr}[Y_{t+1} \in C \mid Y_t \in B] &amp; = &amp; 1
+\\[4pt]
+\mbox{Pr}[Y_{t+1} \in D \mid Y_t \in C] &amp; = &amp; 1
+\\[4pt]
+\mbox{Pr}[Y_{t+1} \in A \mid Y_t \in D] &amp; = &amp; 1
+\end{array}
+\]</span></p>
+<p>We can easily simulate such a chain by taking <span class="math inline">\(A, B, C, D\)</span> to be unit
+boxes in each quadrant of the real plane, starting in the positive
+(upper right) quadrant and moving clockwise. The Markov chain may be
+simulated as.</p>
+<pre><code>y[1] &lt;- (uniform_rng(0, 1), uniform_rng(0, 1))
+for (t in 2:T)
+  if (y[t - 1] in A)
+    y[t] = uniform_rng(B)
+  else if (y[t - 1] in B)
+    y[t] = uniform_rng(C)
+  else if (y[t - 1] in C)
+    y[t] = uniform_rng(D)
+  else
+    y[t] = uniform_rng(A)</code></pre>
+<p>Let’s plot that for <span class="math inline">\(T = 20\)</span> steps.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-145"></span>
+<p class="caption marginnote shownote">
+Figure 18.1: Plot of 20 steps of a periodic continuous Markov chain. Each value is drawn from a unit quadrant starting from the upper right (positive) quadrant and proceeding in a clockwise order.
+</p>
+<img src="_main_files/figure-html/unnamed-chunk-145-1.png" alt="Plot of 20 steps of a periodic continuous Markov chain.  Each value is drawn from a unit quadrant starting from the upper right (positive) quadrant and proceeding in a clockwise order." width="90%"  />
+</div>
+<p>We say that a Markov chain <span class="math inline">\(Y = Y_1, Y_2, \ldots\)</span> is <em>periodic</em> if
+there are volumes <span class="math inline">\(A_1, \ldots, A_K \subseteq \mathbb{R}^N\)</span> such that
+the chain moves deterministically from <span class="math inline">\(A_1\)</span> to <span class="math inline">\(A_2\)</span> to <span class="math inline">\(A_3\)</span> and
+finally from <span class="math inline">\(A_K\)</span> back to <span class="math inline">\(A_1\)</span>. In symbols, a chain is defined to
+be periodic if</p>
+<p><span class="math display">\[
+\mbox{Pr}[Y_{t + 1} \in A_{k + 1} \mid Y_t \in A_k] = 1
+\ \mbox{if} \ 1 \leq k &lt; K
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\mbox{Pr}[Y_{t + 1} \in A_1 \mid Y_t \in A_K] = 1.
+\]</span></p>
+</div>
+<div id="irreducibility" class="section level2">
+<h2><span class="header-section-number">18.7</span> Irreducibility</h2>
+<p>Roughly speaking, a Markov chain on a continuous space is
+<em>irreducible</em> if every subset of nonzero volume has a positive
+probability of eventually being visited from any other point in the
+space.<label for="tufte-sn-229" class="margin-toggle sidenote-number">229</label><input type="checkbox" id="tufte-sn-229" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">229</span> In general, a set <span class="math inline">\(A \subseteq \mathbb{R}^N\)</span> has hypervolume
+<span class="math display">\[\mbox{vol}(A)
+\ = \
+\int_A 1 \, \mbox{d}u
+\ = \
+\int_{\mathbb{R}^N} \mathrm{I}[u \in A] \, \mathrm{d}u.\]</span></span></p>
+</div>
+<div id="ergodicity" class="section level2">
+<h2><span class="header-section-number">18.8</span> Ergodicity</h2>
+<p>A Markov chain is <em>ergodic</em> if it is aperiodic and irreducible.
+Ergodicity is important because it ensures that we converge to the
+stationary distribution if there is one.</p>
+<p><strong>Fundamental theorem of Markov chain Monte Carlo</strong>. If the discrete
+time, time-homogeneous Markov chain <span class="math inline">\(Y = Y_1, Y_2, \ldots\)</span> with <span class="math inline">\(Y_t \in \mathbb{R}^N\)</span> is ergodic and has stationary distribution <span class="math inline">\(\pi\)</span>,
+then</p>
+<p><span class="math display">\[
+\lim_{t \rightarrow \infty}
+\mbox{Pr}[Y_t \in A \mid Y_1 = y]
+\ = \
+\int_{\mathbb{R}^N} \mathrm{I}[y \in A] \times \pi(y) \, \mathrm{d}y.
+\]</span></p>
+<p>Furthermore, for well-behaved functions <span class="math inline">\(f\)</span>,<label for="tufte-sn-230" class="margin-toggle sidenote-number">230</label><input type="checkbox" id="tufte-sn-230" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">230</span> The well-behavedness
+required here is convergence of the absolute expectation,
+<span class="math display">\[\int_{\mathbb{R}^N} \left| f(y) \right| \times \pi(y) \ \mathrm{d}y &lt;
+\infty.\]</span></span></p>
+<p><span class="math display">\[
+\lim_{T \rightarrow \infty}
+\frac{1}{T} \sum_{t=1}^T \, f(Y_t)
+\ = \
+\int_{\mathbb{R}^N} f(u) \times \pi(u) \, \mathrm{d}u.
+\]</span></p>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="regression-to-the-mean.html"><button class="btn btn-default">Previous</button></a>
+<a href="random-walk-metropolis.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

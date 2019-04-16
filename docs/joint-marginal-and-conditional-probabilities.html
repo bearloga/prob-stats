@@ -17,7 +17,7 @@
 
 <meta name="author" content="Bob Carpenter" />
 
-<meta name="date" content="2018-01-01" />
+<meta name="date" content="2019-01-01" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -55,14 +55,24 @@ MathJax.Hub.Config({
 <li><a href="multiple-random-variables-and-probability-functions.html#multiple-random-variables-and-probability-functions"><span class="toc-section-number">2</span> Multiple Random Variables and Probability Functions</a></li>
 <li><a href="expectations-and-variance.html#expectations-and-variance"><span class="toc-section-number">3</span> Expectations and Variance</a></li>
 <li><a href="joint-marginal-and-conditional-probabilities.html#joint-marginal-and-conditional-probabilities"><span class="toc-section-number">4</span> Joint, Marginal, and Conditional Probabilities</a></li>
-<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">5</span> Continuous Random Variables</a></li>
-<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">6</span> Continuous Distributions and Densities</a></li>
-<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">7</span> Statistical Inference and Inverse Problems</a></li>
-<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">8</span> Rejection Sampling</a></li>
-<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">9</span> Posterior Predictive Inference</a></li>
-<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">10</span> Pseudorandom Number Generators</a></li>
-<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">11</span> Floating Point Arithmetic</a></li>
-<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">12</span> Normal Distribution</a></li>
+<li><a href="finite-state-markov-chains.html#finite-state-markov-chains"><span class="toc-section-number">5</span> Finite-State Markov Chains</a></li>
+<li><a href="stationary-distributions-and-markov-chains.html#stationary-distributions-and-markov-chains"><span class="toc-section-number">6</span> Stationary Distributions and Markov Chains</a></li>
+<li><a href="infinite-discrete-markov-chains.html#infinite-discrete-markov-chains"><span class="toc-section-number">7</span> Infinite Discrete Markov Chains</a></li>
+<li><a href="continuous-random-variables.html#continuous-random-variables"><span class="toc-section-number">8</span> Continuous Random Variables</a></li>
+<li><a href="continuous-distributions-and-densities.html#continuous-distributions-and-densities"><span class="toc-section-number">9</span> Continuous Distributions and Densities</a></li>
+<li><a href="statistical-inference-and-inverse-problems.html#statistical-inference-and-inverse-problems"><span class="toc-section-number">10</span> Statistical Inference and Inverse Problems</a></li>
+<li><a href="rejection-sampling.html#rejection-sampling"><span class="toc-section-number">11</span> Rejection Sampling</a></li>
+<li><a href="posterior-predictive-inference.html#posterior-predictive-inference"><span class="toc-section-number">12</span> Posterior Predictive Inference</a></li>
+<li><a href="pseudorandom-number-generators.html#pseudorandom-number-generators"><span class="toc-section-number">13</span> Pseudorandom Number Generators</a></li>
+<li><a href="floating-point-arithmetic.html#floating-point-arithmetic"><span class="toc-section-number">14</span> Floating Point Arithmetic</a></li>
+<li><a href="normal-distribution.html#normal-distribution"><span class="toc-section-number">15</span> Normal Distribution</a></li>
+<li><a href="calibration-and-sharpness.html#calibration-and-sharpness"><span class="toc-section-number">16</span> Calibration and Sharpness</a></li>
+<li><a href="regression-to-the-mean.html#regression-to-the-mean"><span class="toc-section-number">17</span> Regression to the Mean</a></li>
+<li><a href="markov-chain-monte-carlo-methods.html#markov-chain-monte-carlo-methods"><span class="toc-section-number">18</span> Markov Chain Monte Carlo Methods</a></li>
+<li><a href="random-walk-metropolis.html#random-walk-metropolis"><span class="toc-section-number">19</span> Random Walk Metropolis</a></li>
+<li><a href="monitoring-approximate-convergence.html#monitoring-approximate-convergence"><span class="toc-section-number">20</span> Monitoring Approximate Convergence</a></li>
+<li><a href="exponential-and-poisson-distributions.html#exponential-and-poisson-distributions"><span class="toc-section-number">21</span> Exponential and Poisson Distributions</a></li>
+<li><a href="conjugate-priors.html#conjugate-priors"><span class="toc-section-number">22</span> Conjugate Priors</a></li>
 </ul>
 </div>
 </div>
@@ -76,16 +86,16 @@ MathJax.Hub.Config({
 <p>What if I told you that you just tested positive on a diagnostic test
 with 95% accuracy, but that there’s only a 16% chance that you have
 the disease in question? This running example will explain how this
-can happen.<label for="tufte-sn-65" class="margin-toggle sidenote-number">65</label><input type="checkbox" id="tufte-sn-65" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">65</span> The example diagnostic accuracies and disease prevalences
+can happen.<label for="tufte-sn-66" class="margin-toggle sidenote-number">66</label><input type="checkbox" id="tufte-sn-66" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">66</span> The example diagnostic accuracies and disease prevalences
 we will use for simulation are not unrealistic—this kind of thing
 happens all the time in practice, which is why there are often
 batteries of follow-up tests after preliminary positive test results.</span></p>
 <p>Suppose the random variable <span class="math inline">\(Z \in 0:1\)</span> represents whether a
-particular subject has a specific disease.<label for="tufte-sn-66" class="margin-toggle sidenote-number">66</label><input type="checkbox" id="tufte-sn-66" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">66</span> <span class="math inline">\(Z = 1\)</span> if the subject has
+particular subject has a specific disease.<label for="tufte-sn-67" class="margin-toggle sidenote-number">67</label><input type="checkbox" id="tufte-sn-67" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">67</span> <span class="math inline">\(Z = 1\)</span> if the subject has
 the disease and <span class="math inline">\(Z = 0\)</span> if not.</span> Now suppose there is a diagnostic
 test for whether a subject has the disease. Further suppose the
 random variabel <span class="math inline">\(Y \in 0:1\)</span> represents the result of applying the test
-to the same subject.<label for="tufte-sn-67" class="margin-toggle sidenote-number">67</label><input type="checkbox" id="tufte-sn-67" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">67</span> <span class="math inline">\(Y = 1\)</span> if the test result is positive and <span class="math inline">\(Y = 0\)</span> if it’s negative.</span></p>
+to the same subject.<label for="tufte-sn-68" class="margin-toggle sidenote-number">68</label><input type="checkbox" id="tufte-sn-68" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">68</span> <span class="math inline">\(Y = 1\)</span> if the test result is positive and <span class="math inline">\(Y = 0\)</span> if it’s negative.</span></p>
 <p>Now suppose the test is 95% accurate in the sense that</p>
 <ul>
 <li>if the test is administered to a subject with the disease (i.e., <span class="math inline">\(Z = 1\)</span>), there’s a 95% chance the test result will be positive (i.e.,
@@ -118,14 +128,14 @@ but not always, gives us information about the probability of
 probability we have introduced for event probabilities. The
 difference is in the semantics—conditional probabilities are
 restricted to selecting a way the world can be that is consistent with
-the event <span class="math inline">\(\mathrm{B}\)</span> occurring.<label for="tufte-sn-68" class="margin-toggle sidenote-number">68</label><input type="checkbox" id="tufte-sn-68" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">68</span> Formally, an event <span class="math inline">\(\mathrm{B}\)</span> is
+the event <span class="math inline">\(\mathrm{B}\)</span> occurring.<label for="tufte-sn-69" class="margin-toggle sidenote-number">69</label><input type="checkbox" id="tufte-sn-69" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">69</span> Formally, an event <span class="math inline">\(\mathrm{B}\)</span> is
 modeled as a set of ways the world can be, i.e., a subset <span class="math inline">\(\mathrm{B} \subseteq \Omega\)</span> of the sample space <span class="math inline">\(\Omega\)</span>. The conditional
 probability function <span class="math inline">\(\mbox{Pr}[\, \cdot \mid \mathrm{B}]\)</span> can be
 interpreted as an ordinary probability distribution with sample space
 <span class="math inline">\(\mathrm{B}\)</span> instead of the original <span class="math inline">\(\Omega\)</span>.</span></p>
 <p>For example, the sum of exclusive and exhaustive probabilities must be
 one, and thus the diagnostic error probabilities are one minus the
-correct diagnosis probabilities,<label for="tufte-sn-69" class="margin-toggle sidenote-number">69</label><input type="checkbox" id="tufte-sn-69" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">69</span> These error rates are often called the
+correct diagnosis probabilities,<label for="tufte-sn-70" class="margin-toggle sidenote-number">70</label><input type="checkbox" id="tufte-sn-70" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">70</span> These error rates are often called the
 false positive rate and false negative rate, the positive and negative
 in this case being the test result and the false coming from not
 matching the true disease status.</span></p>
@@ -142,7 +152,7 @@ matching the true disease status.</span></p>
 <p>Joint probability notation expresses the probability of multiple
 events happening. For instance, <span class="math inline">\(\mbox{Pr}[Y = 1, Z = 1]\)</span> is the
 probability of both events, <span class="math inline">\(Y = 1\)</span> and <span class="math inline">\(Z = 1\)</span>, occurring.</p>
-<p>In general, if <span class="math inline">\(\mathrm{A}\)</span> and <span class="math inline">\(\mathrm{B}\)</span> are events,<label for="tufte-sn-70" class="margin-toggle sidenote-number">70</label><input type="checkbox" id="tufte-sn-70" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">70</span> We use
+<p>In general, if <span class="math inline">\(\mathrm{A}\)</span> and <span class="math inline">\(\mathrm{B}\)</span> are events,<label for="tufte-sn-71" class="margin-toggle sidenote-number">71</label><input type="checkbox" id="tufte-sn-71" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">71</span> We use
 capital roman letters for event variables to distinguish them from
 random variables for which we use capital italic letters.</span> we write
 <span class="math inline">\(\mbox{Pr}[\mathrm{A}, \mathrm{B}]\)</span> for the event of both <span class="math inline">\(\mathrm{A}\)</span>
@@ -151,7 +161,7 @@ terms of conjunction (“and” in English), the definition is symmetric,
 <span class="math display">\[\mbox{Pr}[\mathrm{A}, \mathrm{B}] = \mbox{Pr}[\mathrm{B},
 \mathrm{A}].\]</span></p>
 <p>In the context of a joint probability <span class="math inline">\(\mbox{Pr}[\mathrm{A}, \mathrm{B}]\)</span>, the single
-event <span class="math inline">\(\mbox{Pr}[\mathrm{A}]\)</span> is called a <em>marginal probability</em>.<label for="tufte-sn-71" class="margin-toggle sidenote-number">71</label><input type="checkbox" id="tufte-sn-71" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">71</span> Because of
+event <span class="math inline">\(\mbox{Pr}[\mathrm{A}]\)</span> is called a <em>marginal probability</em>.<label for="tufte-sn-72" class="margin-toggle sidenote-number">72</label><input type="checkbox" id="tufte-sn-72" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">72</span> Because of
 symmetry, <span class="math inline">\(\mbox{Pr}[\mathrm{B}]\)</span> is also a marginal probability.</span></p>
 <p>Joint probability is defined relative to conditional and marginal
 probabilities by</p>
@@ -190,7 +200,7 @@ print &#39;Pr[A | B] = &#39; Pr_A_given_B</code></pre>
 <p>Running that, we get</p>
 <pre><code>   Pr[A | B] = NaN</code></pre>
 <p>The value <code>NaN</code> indicates what is known as the <em>not-a-number</em>
-value.<label for="tufte-sn-72" class="margin-toggle sidenote-number">72</label><input type="checkbox" id="tufte-sn-72" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">72</span> There are technically two types of not-a-number values in the
+value.<label for="tufte-sn-73" class="margin-toggle sidenote-number">73</label><input type="checkbox" id="tufte-sn-73" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">73</span> There are technically two types of not-a-number values in the
 IEEE 754 standard, of which we will only consider the non-signaling
 version.</span> This is a special floating-point value that is different
 from all other values and used to indicate a domain error on an
@@ -205,7 +215,7 @@ print &#39;-3.2 / 0.0 = &#39; -3.2 / 0.0</code></pre>
 <p>These values denote positive infinity (<span class="math inline">\(\infty\)</span>) and negative infinity
 (<span class="math inline">\(-\infty\)</span>), respectively. Like not-a-number, these are special
 reserved floating-point values with the expected interactions with
-other numbers.<label for="tufte-sn-73" class="margin-toggle sidenote-number">73</label><input type="checkbox" id="tufte-sn-73" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">73</span> For example, adding a finite number and an infinity
+other numbers.<label for="tufte-sn-74" class="margin-toggle sidenote-number">74</label><input type="checkbox" id="tufte-sn-74" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">74</span> For example, adding a finite number and an infinity
 yields the infinity and subtracting two infinities produces a
 not-a-number value. For details, see <a href="https://ieeexplore.ieee.org/document/4610935">754-2008—IEEE standard for floating-point
 arithmetic</a>.</span></p>
@@ -237,7 +247,7 @@ print &#39;estimated Pr[Z = 1] = &#39; sum(z) / M</code></pre>
 <p>The program computes the marginals for <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> directly. This is
 straightforward because both <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> are simulated in every
 iteration (as <code>y[m]</code> and <code>z[m]</code> in the code). Marginalization using
-simulation requires no work whatsoever.<label for="tufte-sn-74" class="margin-toggle sidenote-number">74</label><input type="checkbox" id="tufte-sn-74" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">74</span> Marginalization can be
+simulation requires no work whatsoever.<label for="tufte-sn-75" class="margin-toggle sidenote-number">75</label><input type="checkbox" id="tufte-sn-75" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">75</span> Marginalization can be
 tedious, impractical, or impossible to carry out analytically.</span></p>
 <p>Let’s run that with <span class="math inline">\(M = 100\,000\)</span> and see what we get.</p>
 <pre><code>   estimated Pr[Y = 1] = 0.060
@@ -269,7 +279,7 @@ print &#39;estimated Pr[Y = 1 | Z = 1] = &#39; sum(y1z1) / sum(z == 1)
 print &#39;estimated Pr[Y = 1 | Z = 0] = &#39; sum(y1z0) / sum(z == 0)</code></pre>
 <p>We set the indicator variable <code>y1z1[m]</code> to 1 if <span class="math inline">\(Y = 1\)</span> and <span class="math inline">\(Z = 1\)</span> in
 the <span class="math inline">\(m\)</span>-th simulation; <code>y1z0</code> behaves similarly. The operator <code>&amp;</code> is
-used for conjuncton (logical and) in the usual way.<label for="tufte-sn-75" class="margin-toggle sidenote-number">75</label><input type="checkbox" id="tufte-sn-75" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">75</span> The logical and
+used for conjuncton (logical and) in the usual way.<label for="tufte-sn-76" class="margin-toggle sidenote-number">76</label><input type="checkbox" id="tufte-sn-76" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">76</span> The logical and
 operation is often written as <code>&amp;&amp;</code> in programming languages to
 distinguish it from bitwise and, which is conventionally written <code>&amp;</code>.</span></p>
 <p>Recall that <code>z == 0</code>
@@ -284,7 +294,7 @@ status) provides quite a bit of information about the value of <span class="math
 (the diagnostic test result).</p>
 <p>Now let’s do the same thing the other way around,and look at the
 probability of having the disease based on the test result, i.e.,
-<span class="math inline">\(\mbox{Pr}[Z = 1 \mid Y = 1]\)</span> and <span class="math inline">\(\mbox{Pr}[Z = 1 \mid Y = 0]\)</span>.<label for="tufte-sn-76" class="margin-toggle sidenote-number">76</label><input type="checkbox" id="tufte-sn-76" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">76</span> The
+<span class="math inline">\(\mbox{Pr}[Z = 1 \mid Y = 1]\)</span> and <span class="math inline">\(\mbox{Pr}[Z = 1 \mid Y = 0]\)</span>.<label for="tufte-sn-77" class="margin-toggle sidenote-number">77</label><input type="checkbox" id="tufte-sn-77" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">77</span> The
 program is just like the last one.</span></p>
 <pre><code>   estimated Pr[Z = 1 | Y = 1] = 0.159
    estimated Pr[Z = 1 | Y = 0] = 0.001</code></pre>
@@ -305,7 +315,7 @@ disease as disease-carrying subjects test positive.</p>
 <div id="analyzing-the-diagnostic-example" class="section level2">
 <h2><span class="header-section-number">4.6</span> Analyzing the diagnostic example</h2>
 <p>The same thing can be done with algebra as we did in the previous
-section with simulations.<label for="tufte-sn-77" class="margin-toggle sidenote-number">77</label><input type="checkbox" id="tufte-sn-77" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">77</span> Computationally, precomputed algebra is a
+section with simulations.<label for="tufte-sn-78" class="margin-toggle sidenote-number">78</label><input type="checkbox" id="tufte-sn-78" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">78</span> Computationally, precomputed algebra is a
 big win over simulations in terms of both compute time and accuracy.
 It may not be a win when the derivations get tricky and human time is
 taken into consideration.</span> Now we can evaluate joint probabilities,
@@ -505,7 +515,7 @@ infinitely many possible values.</p>
 <div id="fermat-and-the-problem-of-points" class="section level2">
 <h2><span class="header-section-number">4.9</span> Fermat and the problem of points</h2>
 <p>Blaise Pascal and Pierre de Fermat studied the problem of how to
-divide the pot<label for="tufte-sn-78" class="margin-toggle sidenote-number">78</label><input type="checkbox" id="tufte-sn-78" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">78</span> The <em>pot</em> is the total amount bet by both players.</span> of
+divide the pot<label for="tufte-sn-79" class="margin-toggle sidenote-number">79</label><input type="checkbox" id="tufte-sn-79" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">79</span> The <em>pot</em> is the total amount bet by both players.</span> of
 a game of chance that was interrupted before it was finished. As a
 simple example, Pascal and Fermat considered a game in which each turn
 a fair coin was flipped, and the first player would score a win a
@@ -527,7 +537,7 @@ wins.</p>
 estimate is just the proportion of the simulations in which the first
 player wins. The value of <code>pts</code> must be given as input—that is the
 starting point for simulating the completion of the game, assuming
-neither player yet has ten points.<label for="tufte-sn-79" class="margin-toggle sidenote-number">79</label><input type="checkbox" id="tufte-sn-79" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">79</span> For illustrative purposes only!
+neither player yet has ten points.<label for="tufte-sn-80" class="margin-toggle sidenote-number">80</label><input type="checkbox" id="tufte-sn-80" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">80</span> For illustrative purposes only!
 In robust code, validation should produce diagnostic error messages
 for invalid inputs.</span></p>
 <pre><code>for (m in 1:M)
@@ -539,7 +549,7 @@ for invalid inputs.</span></p>
     else if (pts[2] == 10) win[m] = 0
 print &#39;est. Pr[player 1 wins] = &#39; sum(win) / M</code></pre>
 <p>If the while-loop terminates because one player has ten points, then
-<code>wins[m]</code> must have been set in the previous value of the loop.<label for="tufte-sn-80" class="margin-toggle sidenote-number">80</label><input type="checkbox" id="tufte-sn-80" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">80</span> In
+<code>wins[m]</code> must have been set in the previous value of the loop.<label for="tufte-sn-81" class="margin-toggle sidenote-number">81</label><input type="checkbox" id="tufte-sn-81" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">81</span> In
 general, programs should be double-checked (ideally by a third party)
 to make sure <em>invariants</em> like this one (i.e., <code>win[m]</code> is always set)
 actually hold. Test code goes a long way to ensuring robustness.</span></p>
@@ -551,7 +561,7 @@ actually hold. Test code goes a long way to ensuring robustness.</span></p>
    est. Pr[player 1 wins] = 0.688
    est. Pr[player 1 wins] = 0.690</code></pre>
 <p>This is very much in line with the result Fermat derived by brute
-force, namely <span class="math inline">\(\frac{11}{16} \approx 0.688.\)</span><label for="tufte-sn-81" class="margin-toggle sidenote-number">81</label><input type="checkbox" id="tufte-sn-81" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">81</span> There are at most four
+force, namely <span class="math inline">\(\frac{11}{16} \approx 0.688.\)</span><label for="tufte-sn-82" class="margin-toggle sidenote-number">82</label><input type="checkbox" id="tufte-sn-82" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">82</span> There are at most four
 more turns required, which have a total of <span class="math inline">\(2^4 = 16\)</span> possible
 outcomes, HHHH, HHHT, HHTH, <span class="math inline">\(\ldots,\)</span> TTTH, TTTT, of which 11 produce
 wins for the first player.</span></p>
@@ -570,14 +580,14 @@ and <span class="math inline">\(Y\)</span> are said to be <em>independent</em> i
 <p><span class="math display">\[
 p_{X,Y}(x, y) = p_X(x) \times p_Y(y).
 \]</span></p>
-<p>for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.<label for="tufte-sn-82" class="margin-toggle sidenote-number">82</label><input type="checkbox" id="tufte-sn-82" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">82</span> This is equivalent to requiring the events <span class="math inline">\(X \leq x\)</span> and <span class="math inline">\(Y \leq y\)</span> to be independent for every <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.
+<p>for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.<label for="tufte-sn-83" class="margin-toggle sidenote-number">83</label><input type="checkbox" id="tufte-sn-83" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">83</span> This is equivalent to requiring the events <span class="math inline">\(X \leq x\)</span> and <span class="math inline">\(Y \leq y\)</span> to be independent for every <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.
 Events A and B are said to be <em>independent</em> if <span class="math inline">\(\mbox{Pr}[\mathrm{A}, \mathrm{B}] \ = \ \mbox{Pr}[\mathrm{A}] \times \mbox{Pr}[\mathrm{B}]\)</span>.</span></p>
 <p>By way of example, we have been assuming that a fair dice throw
 involves the throw of two independent and fair dice. That is, if
 <span class="math inline">\(Y_1\)</span> is the first die and <span class="math inline">\(Y_2\)</span> is the second die, then <span class="math inline">\(Y_1\)</span> is
 independent of <span class="math inline">\(Y_2\)</span>.</p>
 <p>In the diagnostic testing example, the disease state <span class="math inline">\(Z\)</span> and the test
-result <span class="math inline">\(Y\)</span> are not independent.<label for="tufte-sn-83" class="margin-toggle sidenote-number">83</label><input type="checkbox" id="tufte-sn-83" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">83</span> That would be a very poor test,
+result <span class="math inline">\(Y\)</span> are not independent.<label for="tufte-sn-84" class="margin-toggle sidenote-number">84</label><input type="checkbox" id="tufte-sn-84" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">84</span> That would be a very poor test,
 indeed!</span>. This can easily be verified because <span class="math inline">\(p_{Y|Z}(y \mid z) \neq p_Y(y)\)</span>.</p>
 </div>
 <div id="independence-of-multiple-random-variables" class="section level2">
@@ -590,11 +600,11 @@ p_{Y_1, \ldots, Y_N}(y_1, \ldots, y_N)
 \ = \
 p_{Y_1}(y1) \times \cdots \times p_{Y_N}(y_N).
 \]</span></p>
-<p>But neither of these is enough.<label for="tufte-sn-84" class="margin-toggle sidenote-number">84</label><input type="checkbox" id="tufte-sn-84" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">84</span> Analysis in general and probability
+<p>But neither of these is enough.<label for="tufte-sn-85" class="margin-toggle sidenote-number">85</label><input type="checkbox" id="tufte-sn-85" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">85</span> Analysis in general and probability
 theory in particular defeat simple definitions with nefarious edge
 cases.</span> For a set of random variables to be <em>independent</em>, the
 probability of each of its subsets must factor into the product of its
-marginals.<label for="tufte-sn-85" class="margin-toggle sidenote-number">85</label><input type="checkbox" id="tufte-sn-85" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">85</span> More precisely, <span class="math inline">\(Y_1, \ldots, Y_N\)</span> are <em>independent</em> if
+marginals.<label for="tufte-sn-86" class="margin-toggle sidenote-number">86</label><input type="checkbox" id="tufte-sn-86" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">86</span> More precisely, <span class="math inline">\(Y_1, \ldots, Y_N\)</span> are <em>independent</em> if
 for every <span class="math inline">\(M \leq N\)</span> and permutation <span class="math inline">\(\pi\)</span> of <span class="math inline">\(1:N\)</span> (i.e., a bijection
 between <span class="math inline">\(1:N\)</span> and itself), we have <span class="math display">\[\begin{array}{l}
 \displaystyle p_{Y_{\pi(1)},
@@ -668,7 +678,7 @@ distributed.</p>
 </div>
 <p style="text-align: center;">
 <a href="expectations-and-variance.html"><button class="btn btn-default">Previous</button></a>
-<a href="continuous-random-variables.html"><button class="btn btn-default">Next</button></a>
+<a href="finite-state-markov-chains.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>
